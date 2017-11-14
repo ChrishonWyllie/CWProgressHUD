@@ -28,7 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		23A03048C8B0C2967BB00E00 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		23A03048C8B0C2967BB00E00 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		4E7541CFB333102DACBBE53E /* Pods_CWProgressHUD_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CWProgressHUD_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD01AFB9204008FA782 /* CWProgressHUD_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CWProgressHUD_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -40,9 +40,9 @@
 		607FACE51AFB9204008FA782 /* CWProgressHUD_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CWProgressHUD_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
-		78B5AF74D629489D3E753DC5 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		78B5AF74D629489D3E753DC5 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		9F6E0293B53A92C83E606D45 /* Pods_CWProgressHUD_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CWProgressHUD_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BA25CFA3310F4B61CAD2DB30 /* CWProgressHUD.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = CWProgressHUD.podspec; path = ../CWProgressHUD.podspec; sourceTree = "<group>"; };
+		BA25CFA3310F4B61CAD2DB30 /* CWProgressHUD.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = CWProgressHUD.podspec; path = ../CWProgressHUD.podspec; sourceTree = "<group>"; };
 		BD022DB3E0C02E585F780014 /* Pods-CWProgressHUD_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWProgressHUD_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CWProgressHUD_Example/Pods-CWProgressHUD_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		CD218542F8CA7186E11243B9 /* Pods-CWProgressHUD_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWProgressHUD_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-CWProgressHUD_Example/Pods-CWProgressHUD_Example.release.xcconfig"; sourceTree = "<group>"; };
 		F3CCFE2C28B8EF2BA81BA3E1 /* Pods-CWProgressHUD_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CWProgressHUD_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CWProgressHUD_Tests/Pods-CWProgressHUD_Tests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -215,6 +215,7 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = UL42AV8U5L;
 						LastSwiftMigration = 0900;
 					};
 					607FACE41AFB9204008FA782 = {
@@ -517,7 +518,9 @@
 			baseConfigurationReference = BD022DB3E0C02E585F780014 /* Pods-CWProgressHUD_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = UL42AV8U5L;
 				INFOPLIST_FILE = CWProgressHUD/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
@@ -532,7 +535,9 @@
 			baseConfigurationReference = CD218542F8CA7186E11243B9 /* Pods-CWProgressHUD_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = UL42AV8U5L;
 				INFOPLIST_FILE = CWProgressHUD/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";

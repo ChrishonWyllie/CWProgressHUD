@@ -1,0 +1,6 @@
+framework module CWProgressHUD {
+  umbrella header "CWProgressHUD-umbrella.h"
+
+  export *
+  module * { export * }
+}
