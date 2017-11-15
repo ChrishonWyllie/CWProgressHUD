@@ -28,7 +28,7 @@ A quick and clean progress HUD. Install library in order to display an interacti
   s.source           = { :git => 'https://github.com/ChrishonWyllie/CWProgressHUD.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '9.0'
+  s.ios.deployment_target = '9.3'
 
   s.source_files = 'CWProgressHUD/Classes/**/*'
   
