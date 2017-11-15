@@ -97,7 +97,7 @@
 		3CB94C5AF1C8211067230F68AB7C4518 /* CWProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
-				661ED1751FBB74560087F1E2 /* Classes */,
+				661ED1761FBC01280087F1E2 /* CWProgressHUD */,
 				9F7BD08FD8C57ECF2C00107523813002 /* Support Files */,
 			);
 			name = CWProgressHUD;
@@ -145,6 +145,15 @@
 				661ED16F1FBB71910087F1E2 /* AnimatorView */,
 			);
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		661ED1761FBC01280087F1E2 /* CWProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				661ED1751FBB74560087F1E2 /* Classes */,
+			);
+			name = CWProgressHUD;
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		7DB346D0F39D3F0E887471402A8071AB = {
