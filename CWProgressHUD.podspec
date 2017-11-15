@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'CWProgressHUD'
-  s.version          = '0.2.0'
+  s.version          = '0.3.0'
   s.summary          = 'A quick and clean progress HUD.'
 
 # This description is used to generate tags and improve search results.
