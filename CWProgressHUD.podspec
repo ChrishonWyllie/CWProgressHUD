@@ -30,7 +30,7 @@ A quick and clean progress HUD. Install library in order to display an interacti
 
   s.ios.deployment_target = '9.3'
 
-  s.source_files = 'CWProgressHUD/Classes/**/*'
+  s.source_files = 'Classes/**/*'
   
   # s.resource_bundles = {
   #   'CWProgressHUD' => ['CWProgressHUD/Assets/*.png']
