@@ -48,7 +48,7 @@ public class CWProgressHUD: NSObject {
     
     private class func loadImage(name: String) -> UIImage? {
         let podBundle = Bundle(for: CWProgressHUD.self)
-        if let url = podBundle.url(forResource: "CWProgressHUD", withExtension: "bundle") {
+        if let url = podBundle.url(forResource: "CWProgressHUD/Resources", withExtension: "bundle") {
             let bundle = Bundle(url: url)
             return UIImage(named: name, in: bundle, compatibleWith: nil)
         }
@@ -471,6 +471,8 @@ public class CWProgressHUD: NSObject {
             progressHUDBackgroundView.addSubview(hudImageView)
             if let xsymbol = loadImage(name: selectedTheme.colors.XsymbolImageName) {
                 hudImageView.image = xsymbol
+            } else {
+                print("Could not find image")
             }
             progressHUDBackgroundView.addSubview(hudMessageLabel)
             progressHUDBackgroundView.backgroundColor = selectedTheme.colors.backgroundColor
@@ -601,16 +603,6 @@ public class CWProgressHUD: NSObject {
     
     public class func setStyle(_ style: CWProgressHUDStyle) {
         print("CWProgressHUD style set to: .\(style)")
-        
         selectedTheme = style
-        print("CWProgressHUD style set to: .\(selectedTheme.colors.backgroundColor)")
-        print("CWProgressHUD style set to: .\(selectedTheme.colors.textColor)")
-        
-        
-        /*
-         progressHUDBackgroundView.backgroundColor = style.colors.backgroundColor
-         hudMessageLabel.textColor = style.colors.textColor
-         let _ = spinnersGroup.map { $0.layer.strokeColor = style.colors.textColor.cgColor }
-         */
     }
 }
