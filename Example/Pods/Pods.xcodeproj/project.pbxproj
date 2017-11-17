@@ -48,6 +48,8 @@
 		6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		661ED1711FBB71D60087F1E2 /* DisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayView.swift; sourceTree = "<group>"; };
 		661ED1731FBB71EC0087F1E2 /* AnimatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatorView.swift; sourceTree = "<group>"; };
+		661ED1921FBF63630087F1E2 /* x-symbol-darktheme.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "x-symbol-darktheme.png"; sourceTree = "<group>"; };
+		661ED1931FBF63630087F1E2 /* x-symbol-whitetheme.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "x-symbol-whitetheme.png"; sourceTree = "<group>"; };
 		7876CC9993538608E8B37D738BC04D70 /* CWProgressHUD-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CWProgressHUD-prefix.pch"; sourceTree = "<group>"; };
 		7A1C1BAAE9704EF0382D09CFE04F89EC /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88EEAA089CEDD51D45A0A285AB3A278A /* Pods-CWProgressHUD_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CWProgressHUD_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 		3CB94C5AF1C8211067230F68AB7C4518 /* CWProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
+				661ED1911FBF63530087F1E2 /* Resources */,
 				661ED1751FBB74560087F1E2 /* Classes */,
 				9F7BD08FD8C57ECF2C00107523813002 /* Support Files */,
 			);
@@ -145,6 +148,15 @@
 				661ED16F1FBB71910087F1E2 /* AnimatorView */,
 			);
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		661ED1911FBF63530087F1E2 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				661ED1921FBF63630087F1E2 /* x-symbol-darktheme.png */,
+				661ED1931FBF63630087F1E2 /* x-symbol-whitetheme.png */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		7DB346D0F39D3F0E887471402A8071AB = {

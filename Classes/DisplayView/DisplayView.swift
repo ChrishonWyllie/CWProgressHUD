@@ -15,17 +15,20 @@ private let deviceScreenHeight: CGFloat = UIScreen.main.bounds.height
 
 private let darkColor: UIColor  = UIColor(red: 60/255, green: 60/255, blue: 60/255, alpha: 1.0/1.0)
 private let lightColor: UIColor = .white
+private let XsymbolImageNameDark: String = "x-symbol-darktheme"
+private let XsymbolImageNameLight: String = "x-symbol-whitetheme"
 
 private struct Theme {
     var backgroundColor: UIColor
     var textColor: UIColor
+    var XsymbolImageName: String
 }
 
-private let darkTheme   = Theme(backgroundColor: darkColor,  textColor: lightColor)
-private let lightTheme  = Theme(backgroundColor: lightColor, textColor: darkColor)
+private let darkTheme   = Theme(backgroundColor: darkColor,  textColor: lightColor, XsymbolImageName: XsymbolImageNameLight)
+private let lightTheme  = Theme(backgroundColor: lightColor, textColor: darkColor, XsymbolImageName: XsymbolImageNameDark)
+
 
 public enum CWProgressHUDStyle {
-    //internal enum CWProgressHUDStyle {
     case dark, light
     
     fileprivate var colors: Theme {
@@ -43,6 +46,15 @@ var selectedTheme: CWProgressHUDStyle = .light
 
 public class CWProgressHUD: NSObject {
     
+    private class func loadImage(name: String) -> UIImage? {
+        let podBundle = Bundle(for: CWProgressHUD.self)
+        if let url = podBundle.url(forResource: "CWProgressHUD", withExtension: "bundle") {
+            let bundle = Bundle(url: url)
+            return UIImage(named: name, in: bundle, compatibleWith: nil)
+        }
+        return nil
+    }
+    
     static var isShowing: Bool = false
     
     private static var progressHUDBackgroundView: UIView = {
@@ -53,6 +65,13 @@ public class CWProgressHUD: NSObject {
         view.layer.cornerRadius = 15
         view.backgroundColor = selectedTheme.colors.backgroundColor
         return view
+    }()
+    
+    private static var hudImageView: UIImageView = {
+        let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.contentMode = .scaleAspectFill
+        return image
     }()
     
     private static var hudMessageLabel: UILabel = {
@@ -428,6 +447,96 @@ public class CWProgressHUD: NSObject {
             }
         }
     }
+    
+    
+    
+    
+    // --------------------------------------------------------------------------------------------------------------------------------------- //
+    
+    
+    public class func showError(withMessage message: String) {
+        if let window = UIApplication.shared.keyWindow {
+            
+            if isShowing == true {
+                dismiss()
+            }
+            isShowing = true
+            
+            windowWidth = window.frame.width
+            windowHeight = window.frame.height
+            halfViewSize = progressHUDWidthXHeight / 2
+            //window.isUserInteractionEnabled = true
+            //window.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismiss)))
+            window.addSubview(self.progressHUDBackgroundView)
+            progressHUDBackgroundView.addSubview(hudImageView)
+            if let xsymbol = loadImage(name: selectedTheme.colors.XsymbolImageName) {
+                hudImageView.image = xsymbol
+            }
+            progressHUDBackgroundView.addSubview(hudMessageLabel)
+            progressHUDBackgroundView.backgroundColor = selectedTheme.colors.backgroundColor
+            
+            
+            print("CWProgressHUD is now showing: \(isShowing), with message: \(message)")
+            print("screen width: \(UIScreen.main.bounds.width)")
+            print("screen height: \(UIScreen.main.bounds.height)")
+            
+            
+            
+            
+            
+            
+            // Could have a variable height depending on message text
+            hudWidthAnchor = progressHUDBackgroundView.widthAnchor.constraint(equalToConstant: progressHUDWidthXHeight)
+            hudCenterXAnchor = progressHUDBackgroundView.centerXAnchor.constraint(equalTo: window.centerXAnchor)
+            hudCenterYAnchor = progressHUDBackgroundView.centerYAnchor.constraint(equalTo: window.centerYAnchor, constant: windowHeight)
+            hudWidthAnchor?.isActive = true
+            hudCenterXAnchor?.isActive = true
+            hudCenterYAnchor?.isActive = true
+            
+            self.progressHUDBackgroundView.superview?.layoutIfNeeded()
+            
+            // 120 - 80 = 40
+            hudImageView.widthAnchor.constraint(equalToConstant: progressHUDWidthXHeight - 80).isActive = true
+            hudImageView.heightAnchor.constraint(equalToConstant: progressHUDWidthXHeight - 80).isActive = true
+            hudImageView.centerXAnchor.constraint(equalTo: progressHUDBackgroundView.centerXAnchor).isActive = true
+            hudImageView.topAnchor.constraint(equalTo: progressHUDBackgroundView.topAnchor, constant: 16).isActive = true
+            
+            
+            
+            
+            
+            hudMessageLabel.text = message
+            hudMessageLabel.textColor = selectedTheme.colors.textColor
+            hudMessageLabel.leadingAnchor.constraint(equalTo: progressHUDBackgroundView.leadingAnchor, constant: 8).isActive = true
+            hudMessageLabel.topAnchor.constraint(equalTo: hudImageView.bottomAnchor, constant: 16).isActive = true
+            hudMessageLabel.trailingAnchor.constraint(equalTo: progressHUDBackgroundView.trailingAnchor, constant: -8).isActive = true
+            hudMessageLabel.bottomAnchor.constraint(equalTo: progressHUDBackgroundView.bottomAnchor, constant: -8).isActive = true
+            
+            
+            progressHUDBackgroundView.layoutIfNeeded()
+            
+            // Finally, animate the view onto screen by moving up the centerYAnchor
+            hudCenterYAnchor?.constant = 0
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.9, options: .curveEaseInOut, animations: {
+                
+                self.progressHUDBackgroundView.superview?.layoutIfNeeded()
+                
+            }, completion: { (completed) in
+                
+                timer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(self.dismiss), userInfo: nil, repeats: false)
+                
+            })
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
