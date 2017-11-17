@@ -32,7 +32,6 @@ public enum CWProgressHUDStyle {
     case dark, light
     
     fileprivate var colors: Theme {
-        // 'self' pointing to this CWProgressHUDStyle enum. So must exhaust all cases
         switch self {
         case .dark:  return darkTheme
         case .light: return lightTheme
@@ -45,15 +44,6 @@ var selectedTheme: CWProgressHUDStyle = .light
 
 
 public class CWProgressHUD: NSObject {
-    
-    private class func loadImage(name: String) -> UIImage? {
-        let podBundle = Bundle(for: CWProgressHUD.self)
-        if let url = podBundle.url(forResource: "CWProgressHUD/Resources", withExtension: "bundle") {
-            let bundle = Bundle(url: url)
-            return UIImage(named: name, in: bundle, compatibleWith: nil)
-        }
-        return nil
-    }
     
     static var isShowing: Bool = false
     
@@ -68,7 +58,7 @@ public class CWProgressHUD: NSObject {
     }()
     
     private static var hudImageView: UIImageView = {
-        let image = UIImageView()
+        let image = UIImageView(image: UIImage(named: selectedTheme.colors.XsymbolImageName))
         image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFill
         return image
@@ -139,15 +129,8 @@ public class CWProgressHUD: NSObject {
                 dismiss()
             }
             isShowing = true
-            
-            //window.isUserInteractionEnabled = true
-            //window.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismiss)))
             window.addSubview(self.progressHUDBackgroundView)
             progressHUDBackgroundView.backgroundColor = selectedTheme.colors.backgroundColor
-            
-            print("CWProgressHUD is now showing")
-            print("screen width: \(UIScreen.main.bounds.width)")
-            print("screen height: \(UIScreen.main.bounds.height)")
             
             
             windowWidth = window.frame.width
@@ -159,10 +142,6 @@ public class CWProgressHUD: NSObject {
             hudHeightAnchor = progressHUDBackgroundView.heightAnchor.constraint(equalToConstant: progressHUDWidthXHeight)
             hudCenterXAnchor = progressHUDBackgroundView.centerXAnchor.constraint(equalTo: window.centerXAnchor)
             hudCenterYAnchor = progressHUDBackgroundView.centerYAnchor.constraint(equalTo: window.centerYAnchor, constant: windowHeight)
-            print("hudWidthAnchor constant: \(String(describing: hudWidthAnchor?.constant))")
-            print("hudHeightAnchor constant: \(String(describing: hudHeightAnchor?.constant))")
-            print("hudCenterXAnchor constant: \(String(describing: hudCenterXAnchor?.constant))")
-            print("hudCenterYAnchor constant: \(String(describing: hudCenterYAnchor?.constant))")
             hudWidthAnchor?.isActive = true
             hudHeightAnchor?.isActive = true
             hudCenterXAnchor?.isActive = true
@@ -216,12 +195,9 @@ public class CWProgressHUD: NSObject {
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.9, options: .curveEaseInOut, animations: {
                 
                 self.progressHUDBackgroundView.superview?.layoutIfNeeded()
-                //progressHUDBackgroundView.frame = CGRect(x: windowWidth / 2 - halfViewSize, y: windowHeight / 2 - halfViewSize, width: progressHUDWidthXHeight, height: progressHUDWidthXHeight)
                 
             }, completion: { (completed) in
                 
-                // Perhaps there should be no timer. Show the progressHUD indefinitely until the user decides to dismiss it
-                //timer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(self.dismiss), userInfo: nil, repeats: false)
                 
             })
         }
@@ -230,7 +206,7 @@ public class CWProgressHUD: NSObject {
     
     
     
-    // --------------------------------------------------------------------------------------------------------------------------------------- //
+    // ---------------------------------------------------------------------------------------------------------------- //
     
     
     
@@ -247,19 +223,9 @@ public class CWProgressHUD: NSObject {
             windowWidth = window.frame.width
             windowHeight = window.frame.height
             halfViewSize = progressHUDWidthXHeight / 2
-            //window.isUserInteractionEnabled = true
-            //window.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismiss)))
             window.addSubview(self.progressHUDBackgroundView)
             progressHUDBackgroundView.addSubview(hudMessageLabel)
             progressHUDBackgroundView.backgroundColor = selectedTheme.colors.backgroundColor
-            
-            
-            print("CWProgressHUD is now showing: \(isShowing), with message: \(message)")
-            print("screen width: \(UIScreen.main.bounds.width)")
-            print("screen height: \(UIScreen.main.bounds.height)")
-            
-            
-            
             
             
             
@@ -344,7 +310,7 @@ public class CWProgressHUD: NSObject {
         }
     }
     
-    // --------------------------------------------------------------------------------------------------------------------------------------- //
+    // ---------------------------------------------------------------------------------------------------------------- //
     
     
     public class func show(withProgress progress: CGFloat) {
@@ -353,8 +319,6 @@ public class CWProgressHUD: NSObject {
         
         if let window = UIApplication.shared.keyWindow {
             
-            //window.isUserInteractionEnabled = true
-            //window.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismiss)))
             windowWidth = window.frame.width
             windowHeight = window.frame.height
             halfViewSize = progressHUDWidthXHeight / 2
@@ -362,18 +326,11 @@ public class CWProgressHUD: NSObject {
             hudWidthAnchor = progressHUDBackgroundView.widthAnchor.constraint(equalToConstant: progressHUDWidthXHeight)
             hudCenterXAnchor = progressHUDBackgroundView.centerXAnchor.constraint(equalTo: window.centerXAnchor)
             hudCenterYAnchor = progressHUDBackgroundView.centerYAnchor.constraint(equalTo: window.centerYAnchor, constant: windowHeight)
-            //hudWidthAnchor?.isActive = true
-            //hudCenterXAnchor.isActive = true
-            //hudCenterYAnchor.isActive = true
-            //progressHUDBackgroundView.backgroundColor = selectedTheme.colors.backgroundColor
-            
-            
             
             
             
             
             if isShowing == true {
-                print("The progressHUD was already showing")
                 let _ = spinnersGroup.map {
                     $0.layer.strokeEnd = $0.previousStrokeEnd
                     $0.updateProgressAnimation(toProgress: progress)
@@ -382,9 +339,7 @@ public class CWProgressHUD: NSObject {
                 
                 // WARNING!
                 // This may never get called. Possible reason? : since the timer is invalidated at 1.0
-                print("Determining to dismiss. Progress is now: \(progress)")
                 if progress >= 1.0 {
-                    print("time-consuming task has been completed. Progress is now: \(progress). Dismissing...")
                     dismiss()
                 }
                 
@@ -393,7 +348,6 @@ public class CWProgressHUD: NSObject {
                 // Show the ProgressHUD for the first time
                 // Configure constraints and set up animations
                 
-                print("the progressHUD was not already showing")
                 
                 isShowing = true
                 window.addSubview(self.progressHUDBackgroundView)
@@ -451,7 +405,7 @@ public class CWProgressHUD: NSObject {
     
     
     
-    // --------------------------------------------------------------------------------------------------------------------------------------- //
+    // ---------------------------------------------------------------------------------------------------------------- //
     
     
     public class func showError(withMessage message: String) {
@@ -465,24 +419,11 @@ public class CWProgressHUD: NSObject {
             windowWidth = window.frame.width
             windowHeight = window.frame.height
             halfViewSize = progressHUDWidthXHeight / 2
-            //window.isUserInteractionEnabled = true
-            //window.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismiss)))
             window.addSubview(self.progressHUDBackgroundView)
+            
             progressHUDBackgroundView.addSubview(hudImageView)
-            if let xsymbol = loadImage(name: selectedTheme.colors.XsymbolImageName) {
-                hudImageView.image = xsymbol
-            } else {
-                print("Could not find image")
-            }
             progressHUDBackgroundView.addSubview(hudMessageLabel)
             progressHUDBackgroundView.backgroundColor = selectedTheme.colors.backgroundColor
-            
-            
-            print("CWProgressHUD is now showing: \(isShowing), with message: \(message)")
-            print("screen width: \(UIScreen.main.bounds.width)")
-            print("screen height: \(UIScreen.main.bounds.height)")
-            
-            
             
             
             
@@ -589,10 +530,19 @@ public class CWProgressHUD: NSObject {
                         $0.layer.strokeEnd = $0.defaultStrokeEnd
                     }
                     isShowing = false
-                    print("CWProgressHUD has now been dismissed. isShowing: \(isShowing)")
                 })
             }
         }
+    }
+    
+    private class func loadImage(name: String) -> UIImage? {
+        let podBundle = Bundle(for: CWProgressHUD.self)
+        if let url = podBundle.url(forResource: "Resources", withExtension: "bundle") {
+            let bundle = Bundle(url: url)
+            return UIImage(named: name, in: bundle, compatibleWith: nil)
+        } else {
+        }
+        return nil
     }
     
     public class func dismissWithError(_ message: String) {
@@ -602,7 +552,6 @@ public class CWProgressHUD: NSObject {
     // MARK: - Set style funcs
     
     public class func setStyle(_ style: CWProgressHUDStyle) {
-        print("CWProgressHUD style set to: .\(style)")
         selectedTheme = style
     }
 }

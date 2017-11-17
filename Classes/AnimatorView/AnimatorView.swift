@@ -8,22 +8,6 @@
 import Foundation
 import UIKit
 
-/*
- Swift 3 & 4 : https://medium.com/@abhimuralidharan/swift-3-0-1-access-control-9e71d641a56c
- Swift 2 and below? : https://stackoverflow.com/questions/26087447/private-var-is-accessible-from-outside-the-class
- 
- Access modifiers in Swift are implemented differently than other languages. There are three levels:
- 
- private: accessible only within that particular file
- 
- internal: accessible only within the module (project)
- 
- public: accessible from anywhere
- 
- Unless marked otherwise, everything you write is internal by default.
- 
- Specified as 'internal' to avoid modules that import this library from accessing this directly
- */
 @IBDesignable internal class AnimatorView: UIView {
     
     var animationDuration: Double = 0.0
@@ -43,12 +27,10 @@ import UIKit
         self.animationDuration = animationDuration
         self.rotatesClockwise = rotatesClockwise
         self.progress = progress
-        //let someDefaultFrame: CGRect = CGRect(x: deviceScreenWidth / 2 - 30, y: deviceScreenHeight / 2 - 30, width: 120, height: 120)
         let someDefaultFrame: CGRect = CGRect(x: 0, y: 0, width: 80, height: 80)
         super.init(frame: someDefaultFrame)
     }
     
-    // Get a reference to this UIView's CAShapeLayer. Will use later
     override var layer: CAShapeLayer {
         get { return super.layer as! CAShapeLayer }
     }
@@ -66,16 +48,12 @@ import UIKit
     override func layoutSubviews() {
         super.layoutSubviews()
         layer.fillColor = nil
-        //layer.strokeColor = defaultTheme.colors.textColor.cgColor
         layer.lineWidth = 3
         
         // If this is being presented the normal way using "beginLoadingAnimation"
         if progress == nil {
             layer.strokeStart = defaultStrokeStart
             layer.strokeEnd = defaultStrokeEnd
-        } else {
-            //layer.strokeStart = 0.0
-            //layer.strokeEnd = progress!
         }
         
         setBezierPath(forLayer: layer)
@@ -91,12 +69,6 @@ import UIKit
         gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
         gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.0)
         gradientLayer.colors = [UIColor.clear.cgColor, UIColor.darkGray.cgColor, UIColor.black.cgColor]
-        
-        //let stopOne: CGFloat = 0.0
-        //let stopTwo: CGFloat = 1.0
-        //let locations : [CGFloat] = [stopOne, stopTwo]
-        //gradientLayer.locations = locations as [NSNumber]?
-        
         return gradientLayer
     }()
     
@@ -104,23 +76,6 @@ import UIKit
         let circleBezierPath = UIBezierPath(ovalIn: bounds.insetBy(dx: layer.lineWidth / 2, dy: layer.lineWidth / 2)).cgPath
         layer.path = circleBezierPath
         layer.bounds = circleBezierPath.boundingBox
-        
-        /*
-         // Attempt at adding gradient to layer
-         let lineLayer = CAShapeLayer()
-         lineLayer.fillColor = nil
-         lineLayer.strokeColor = UIColor.red.cgColor
-         lineLayer.lineWidth = 3
-         lineLayer.strokeStart = defaultStrokeStart
-         lineLayer.strokeEnd = defaultStrokeEnd
-         lineLayer.path = circleBezierPath
-         lineLayer.bounds = circleBezierPath.boundingBox
-         lineLayer.frame = circleBezierPath.boundingBox
-         
-         gradientLayer.frame = lineLayer.bounds
-         gradientLayer.mask = lineLayer
-         layer.addSublayer(gradientLayer)
-         */
     }
     
     func beginLoadingAnimation() {
@@ -140,10 +95,6 @@ import UIKit
                             8 * Double.pi, 9 * Double.pi,
                             10 * Double.pi]
         
-        /*
-         if rotatesClockwise {
-         animation.values?.reverse()
-         }*/
         rotatesClockwise ? animation.values?.reverse() : nil
         
         animation.calculationMode = kCAAnimationLinear
@@ -155,7 +106,6 @@ import UIKit
     
     func updateProgressAnimation(toProgress progress: CGFloat) {
         
-        //layer.strokeStart = 0.0
         layer.strokeEnd = progress
         
         let drawAnimation = CABasicAnimation(keyPath: "strokeEnd")
