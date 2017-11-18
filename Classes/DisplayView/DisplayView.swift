@@ -15,8 +15,8 @@ private let deviceScreenHeight: CGFloat = UIScreen.main.bounds.height
 
 private let darkColor: UIColor  = UIColor(red: 60/255, green: 60/255, blue: 60/255, alpha: 1.0/1.0)
 private let lightColor: UIColor = .white
-private let checkmarkSymbolImageNameDark: String = "checkmark-darktheme"
-private let checkmarkSymbolImageNameLight: String = "checkmark-whitetheme"
+private let checkmarkSymbolImageNameDark: String = "checkmark-symbol-darktheme"
+private let checkmarkSymbolImageNameLight: String = "checkmark-symbol-whitetheme"
 private let XsymbolImageNameDark: String = "x-symbol-darktheme"
 private let XsymbolImageNameLight: String = "x-symbol-whitetheme"
 
@@ -83,6 +83,7 @@ public class CWProgressHUD: NSObject {
     }()
     
     private static var timer: Timer = Timer()
+    private static var timeToDismissProgressHUD: CFTimeInterval = 5.0
     
     private static var windowHeight: CGFloat = 0
     private static var windowWidth: CGFloat = 0
@@ -313,7 +314,7 @@ public class CWProgressHUD: NSObject {
                 
             }, completion: { (completed) in
                 
-                timer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(self.dismiss), userInfo: nil, repeats: false)
+                timer = Timer.scheduledTimer(timeInterval: timeToDismissProgressHUD, target: self, selector: #selector(self.dismiss), userInfo: nil, repeats: false)
                 
             })
         }
@@ -441,9 +442,12 @@ public class CWProgressHUD: NSObject {
         if let _ = UIApplication.shared.keyWindow {
             if isShowing == true {
                 
-                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.9, options: .curveEaseInOut, animations: {
+                hudCenterYAnchor?.constant = windowHeight
+                
+                UIView.animate(withDuration: 0.70, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.9, options: .curveEaseInOut, animations: {
                     
-                    progressHUDBackgroundView.frame = CGRect(x: windowWidth / 2 - halfViewSize, y: 1200, width: progressHUDWidthXHeight, height: progressHUDWidthXHeight)
+                    self.progressHUDBackgroundView.superview?.layoutIfNeeded()
+                    //progressHUDBackgroundView.frame = CGRect(x: windowWidth / 2 - halfViewSize, y: 1000, width: progressHUDWidthXHeight, height: progressHUDWidthXHeight)
                     
                 }, completion: { (completed) in
                     
@@ -574,7 +578,7 @@ public class CWProgressHUD: NSObject {
                 
             }, completion: { (completed) in
                 
-                timer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(self.dismiss), userInfo: nil, repeats: false)
+                timer = Timer.scheduledTimer(timeInterval: timeToDismissProgressHUD, target: self, selector: #selector(self.dismiss), userInfo: nil, repeats: false)
                 
             })
         }

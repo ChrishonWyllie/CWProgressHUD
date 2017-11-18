@@ -9,7 +9,6 @@
 import UIKit
 import CWProgressHUD
 
-
 class ViewController: UIViewController {
     
     lazy var progressHUDStyleSegmentedControl: UISegmentedControl = {
