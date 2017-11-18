@@ -15,7 +15,12 @@
   <img style="display: inline; margin: 0 5px;" src="Github Images/light-show-success-with-message_iphonexspacegrey_portrait.png" width=200 height=398 />
   <img style="display: inline; margin: 0 5px;" src="Github Images/light-show-error-with-message_iphonexspacegrey_portrait.png" width=200 height=398 />
 </div>
+ 
+## Usage
 
+```
+CWProgressHUD.show()
+```
 
 
 ## Example
