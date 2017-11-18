@@ -19,15 +19,15 @@
 ## Usage
 
 
-<h1>Displaying the HUD</h1>
+<h3>Displaying the HUD</h3>
+
 ```swift
-CWProgressHUD.setStyle(.dark)
 CWProgressHUD.show()
 ```
 
-<h1>Displaying the HUD</h1>
+<h3>Displaying the HUD</h3>
+
 ```swift
-CWProgressHUD.setStyle(.light)
 CWProgressHUD.show(withMessage: "Your message")
 ```
 
