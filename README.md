@@ -44,7 +44,7 @@ CWProgressHUD.dismiss()
 
 
 <h3>Customizing the HUD</h3>
-
+<p>The HUD allows for two themes: dark and light. The default theme is light which features a white background and black text/images. The dark theme features reverse; black background with white text/images</p>
 ```swift
 CWProgressHUD.setStyle(.light)
 ```
