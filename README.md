@@ -23,12 +23,28 @@
 
 ```swift
 CWProgressHUD.show()
+CWProgressHUD.show(withMessage: "Some message you'd like to display")
 ```
 
 <h3>Displaying the HUD</h3>
 
 ```swift
 CWProgressHUD.show(withMessage: "Your message")
+```
+
+
+<h3>Dismissing the HUD</h3>
+<p>Simply call 'dismiss' to hide the progressHUD
+
+```swift
+CWProgressHUD.dismiss()
+```
+
+
+<h3>Customizing the HUD</h3>
+
+```swift
+CWProgressHUD.setStyle(.light)
 ```
 
 
