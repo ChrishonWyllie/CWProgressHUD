@@ -17,12 +17,8 @@
 		3A7214F19C3CCFAF5B7BFC19723202BC /* x-symbol-darktheme.png in Resources */ = {isa = PBXBuildFile; fileRef = 30F584CF62DFF7AF0A35709849507F52 /* x-symbol-darktheme.png */; };
 		5880E720AC974F46360D87E86F71ABA3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88AAE1F92055A60CC2FC970D7D34634 /* Foundation.framework */; };
 		64FACC23CA623E4EC303BFF049A7D370 /* AnimatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C732C0A59159A7813119C3547E50B06A /* AnimatorView.swift */; };
-		662B30AF1FBFD3BD00140E18 /* checkmark-symbol-whitetheme.png in Resources */ = {isa = PBXBuildFile; fileRef = 662B30AD1FBFD3BD00140E18 /* checkmark-symbol-whitetheme.png */; };
-		662B30B01FBFD3BD00140E18 /* checkmark-symbol-darktheme.png in Resources */ = {isa = PBXBuildFile; fileRef = 662B30AE1FBFD3BD00140E18 /* checkmark-symbol-darktheme.png */; };
-		662B30B11FBFD65B00140E18 /* x-symbol-darktheme.png in Resources */ = {isa = PBXBuildFile; fileRef = 30F584CF62DFF7AF0A35709849507F52 /* x-symbol-darktheme.png */; };
-		662B30B21FBFD66200140E18 /* x-symbol-whitetheme.png in Resources */ = {isa = PBXBuildFile; fileRef = 232FC45B1968FACC68A8D92ECDB1294D /* x-symbol-whitetheme.png */; };
-		662B30B31FBFD66B00140E18 /* checkmark-symbol-whitetheme.png in Resources */ = {isa = PBXBuildFile; fileRef = 662B30AD1FBFD3BD00140E18 /* checkmark-symbol-whitetheme.png */; };
-		662B30B41FBFD66E00140E18 /* checkmark-symbol-darktheme.png in Resources */ = {isa = PBXBuildFile; fileRef = 662B30AE1FBFD3BD00140E18 /* checkmark-symbol-darktheme.png */; };
+		662B30C31FBFDB8300140E18 /* checkmark-symbol-whitetheme.png in Resources */ = {isa = PBXBuildFile; fileRef = 662B30C11FBFDB8300140E18 /* checkmark-symbol-whitetheme.png */; };
+		662B30C41FBFDB8300140E18 /* checkmark-symbol-darktheme.png in Resources */ = {isa = PBXBuildFile; fileRef = 662B30C21FBFDB8300140E18 /* checkmark-symbol-darktheme.png */; };
 		7E566A3CADFF9992B422EC9FA489B20F /* Pods-CWProgressHUD_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 02E9F9C1321D1E8A1E3D480FCCC924E8 /* Pods-CWProgressHUD_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7E8793B5E25AA8689CF84654B5B20DE0 /* Pods-CWProgressHUD_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 31D7AE675EBD1B0FA4DF0BB61C4A9969 /* Pods-CWProgressHUD_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7F11DACE490F124F963677EEB458B997 /* Pods-CWProgressHUD_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C1D69DEEC84181DAA11D1BEB8282947 /* Pods-CWProgressHUD_Tests-dummy.m */; };
@@ -63,8 +59,8 @@
 		4497790A10BD493333A0CF7AF2709F26 /* Pods-CWProgressHUD_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-CWProgressHUD_Example.modulemap"; sourceTree = "<group>"; };
 		450B537FD8DB55C395CEA8607AAC03CD /* Pods-CWProgressHUD_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-CWProgressHUD_Example-frameworks.sh"; sourceTree = "<group>"; };
 		5CD09CE66F5FD0D6501FFA21310AA9D0 /* Pods-CWProgressHUD_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-CWProgressHUD_Tests-frameworks.sh"; sourceTree = "<group>"; };
-		662B30AD1FBFD3BD00140E18 /* checkmark-symbol-whitetheme.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "checkmark-symbol-whitetheme.png"; path = "../Desktop/Portfolio/Github/iOS/CWProgressHUD-images/checkmark-symbol-whitetheme.png"; sourceTree = "<group>"; };
-		662B30AE1FBFD3BD00140E18 /* checkmark-symbol-darktheme.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "checkmark-symbol-darktheme.png"; path = "../Desktop/Portfolio/Github/iOS/CWProgressHUD-images/checkmark-symbol-darktheme.png"; sourceTree = "<group>"; };
+		662B30C11FBFDB8300140E18 /* checkmark-symbol-whitetheme.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "checkmark-symbol-whitetheme.png"; path = "../Desktop/Portfolio/Github/iOS/CWProgressHUD-images/checkmark-symbol-whitetheme.png"; sourceTree = "<group>"; };
+		662B30C21FBFDB8300140E18 /* checkmark-symbol-darktheme.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "checkmark-symbol-darktheme.png"; path = "../Desktop/Portfolio/Github/iOS/CWProgressHUD-images/checkmark-symbol-darktheme.png"; sourceTree = "<group>"; };
 		73CFBCFB447F00D5C4DCF5E69A5970E7 /* DisplayView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DisplayView.swift; sourceTree = "<group>"; };
 		88EEAA089CEDD51D45A0A285AB3A278A /* Pods-CWProgressHUD_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CWProgressHUD_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
 		91C767BE99D3B895A7901160640FAFBA /* Pods-CWProgressHUD_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CWProgressHUD_Tests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -129,8 +125,8 @@
 		01DB4A9F6FA0978E56E007F42E532264 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				662B30AE1FBFD3BD00140E18 /* checkmark-symbol-darktheme.png */,
-				662B30AD1FBFD3BD00140E18 /* checkmark-symbol-whitetheme.png */,
+				662B30C21FBFDB8300140E18 /* checkmark-symbol-darktheme.png */,
+				662B30C11FBFDB8300140E18 /* checkmark-symbol-whitetheme.png */,
 				30F584CF62DFF7AF0A35709849507F52 /* x-symbol-darktheme.png */,
 				232FC45B1968FACC68A8D92ECDB1294D /* x-symbol-whitetheme.png */,
 			);
@@ -410,10 +406,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				325DD7BA45D042D8160ADAB5F1BE38FC /* CWProgressHUD.bundle in Resources */,
-				662B30AF1FBFD3BD00140E18 /* checkmark-symbol-whitetheme.png in Resources */,
-				662B30B11FBFD65B00140E18 /* x-symbol-darktheme.png in Resources */,
-				662B30B21FBFD66200140E18 /* x-symbol-whitetheme.png in Resources */,
-				662B30B01FBFD3BD00140E18 /* checkmark-symbol-darktheme.png in Resources */,
+				662B30C31FBFDB8300140E18 /* checkmark-symbol-whitetheme.png in Resources */,
+				662B30C41FBFDB8300140E18 /* checkmark-symbol-darktheme.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -421,10 +415,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				662B30B31FBFD66B00140E18 /* checkmark-symbol-whitetheme.png in Resources */,
 				3A7214F19C3CCFAF5B7BFC19723202BC /* x-symbol-darktheme.png in Resources */,
 				154A7D236622845181AA4F085076AEFD /* x-symbol-whitetheme.png in Resources */,
-				662B30B41FBFD66E00140E18 /* checkmark-symbol-darktheme.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
