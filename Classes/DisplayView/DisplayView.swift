@@ -536,10 +536,9 @@ public class CWProgressHUD: NSObject {
             self.progressHUDBackgroundView.superview?.layoutIfNeeded()
             
             if let imageNameConfirmed = imageName {
-                print("image confirmed: \(imageNameConfirmed)")
+                //print("image confirmed: \(imageNameConfirmed)")
                 progressHUDBackgroundView.addSubview(hudImageView)
                 if let image = loadImage(withName: imageNameConfirmed) {
-                    print("image object: \(image)")
                     hudImageView.image = image
                 }
                 
