@@ -10,10 +10,10 @@
 <br />
 <br />
 <div id="images">
-  <img style="display: inline; margin: 0 5px;" src="Github Images/dark-show_iphonexspacegrey_portrait.png" width=“120px" height=“320px" />
-  <img style="display: inline; margin: 0 5px;" src="Github Images/dark-show-with-progres_iphonexspacegrey_portrait.png" width=“120px" height=“320px" />
-  <img style="display: inline; margin: 0 5px;" src="Github Images/light-show-success-with-message_iphonexspacegrey_portrait.png" width=“120px" height=“320px" />
-  <img style="display: inline; margin: 0 5px;" src="Github Images/light-show-error-with-message_iphonexspacegrey_portrait.png" width=“120px" height=“320px" />
+  <img style="display: inline; margin: 0 5px;" src="Github Images/dark-show_iphonexspacegrey_portrait.png" width=120 height=320 />
+  <img style="display: inline; margin: 0 5px;" src="Github Images/dark-show-with-progres_iphonexspacegrey_portrait.png" width=120 height=320 />
+  <img style="display: inline; margin: 0 5px;" src="Github Images/light-show-success-with-message_iphonexspacegrey_portrait.png" width=120 height=320 />
+  <img style="display: inline; margin: 0 5px;" src="Github Images/light-show-error-with-message_iphonexspacegrey_portrait.png" width=120 height=320 />
 </div>
 
 
