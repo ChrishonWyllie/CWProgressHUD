@@ -18,8 +18,14 @@
  
 ## Usage
 
-```
+```swift
+CWProgressHUD.setStyle(.dark)
 CWProgressHUD.show()
+```
+
+```swift
+CWProgressHUD.setStyle(.light)
+CWProgressHUD.show(withMessage: "Your message")
 ```
 
 
