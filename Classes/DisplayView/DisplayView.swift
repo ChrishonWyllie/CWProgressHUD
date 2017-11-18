@@ -15,8 +15,8 @@ private let deviceScreenHeight: CGFloat = UIScreen.main.bounds.height
 
 private let darkColor: UIColor  = UIColor(red: 60/255, green: 60/255, blue: 60/255, alpha: 1.0/1.0)
 private let lightColor: UIColor = .white
-private let checkmarkSymbolImageNameDark: String = "checkmark-symbol-darktheme"
-private let checkmarkSymbolImageNameLight: String = "checkmark-symbol-whitetheme"
+private let checkmarkSymbolImageNameDark: String = "checkmark-darktheme"
+private let checkmarkSymbolImageNameLight: String = "checkmark-whitetheme"
 private let XsymbolImageNameDark: String = "x-symbol-darktheme"
 private let XsymbolImageNameLight: String = "x-symbol-whitetheme"
 
