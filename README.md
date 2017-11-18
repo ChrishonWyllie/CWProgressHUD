@@ -26,10 +26,11 @@ CWProgressHUD.show()
 CWProgressHUD.show(withMessage: "Some message you'd like to display")
 ```
 
-<h3>Displaying the HUD</h3>
+<p>Additional uses</p>
 
 ```swift
-CWProgressHUD.show(withMessage: "Your message")
+CWProgressHUD.showSuccess(withMessage: "Your image was uploaded successfully!")
+CWProgressHUD.showError(withMessage: "Could not load data...")
 ```
 
 
