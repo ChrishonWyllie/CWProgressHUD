@@ -1,5 +1,5 @@
 PODS:
-  - CWProgressHUD (0.1.0)
+  - CWProgressHUD (0.4.0)
 
 DEPENDENCIES:
   - CWProgressHUD (from `../`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  CWProgressHUD: b73b94d1f53a09a91978c2a17623b04f8e303d5b
+  CWProgressHUD: fdfc792cf99aee3aa1eb889ef06ae8d4e3bb4401
 
 PODFILE CHECKSUM: 0df729dcb912703b96aebd0c90b193c3c75d1549
 

@@ -1,8 +1,8 @@
 {
   "name": "CWProgressHUD",
-  "version": "0.1.0",
-  "summary": "A short description of CWProgressHUD.",
-  "description": "TODO: Add long description of the pod here.",
+  "version": "0.4.0",
+  "summary": "A quick and clean progress HUD.",
+  "description": "A quick and clean progress HUD. Install library in order to display an interactive progress HUD to users to showcase that a time-consuming event is occuring such as loading some information.",
   "homepage": "https://github.com/ChrishonWyllie/CWProgressHUD",
   "license": {
     "type": "MIT",
@@ -13,10 +13,16 @@
   },
   "source": {
     "git": "https://github.com/ChrishonWyllie/CWProgressHUD.git",
-    "tag": "0.1.0"
+    "tag": "0.4.0"
   },
   "platforms": {
-    "ios": "8.0"
+    "ios": "9.3"
   },
-  "source_files": "CWProgressHUD/Classes/**/*"
+  "source_files": "Classes/**/*",
+  "resource_bundles": {
+    "CWProgressHUD": [
+      "Resources/*.png"
+    ]
+  },
+  "frameworks": "UIKit"
 }

@@ -33,7 +33,7 @@ A quick and clean progress HUD. Install library in order to display an interacti
   s.source_files = 'Classes/**/*'
 
   s.resource_bundles = {
-     'CWProgressHUD' => ['Resources/*']
+     'CWProgressHUD' => ['Resources/*.png']
   }
 
 

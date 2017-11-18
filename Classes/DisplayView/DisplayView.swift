@@ -15,17 +15,26 @@ private let deviceScreenHeight: CGFloat = UIScreen.main.bounds.height
 
 private let darkColor: UIColor  = UIColor(red: 60/255, green: 60/255, blue: 60/255, alpha: 1.0/1.0)
 private let lightColor: UIColor = .white
+private let checkmarkSymbolImageNameDark: String = "checkmark-symbol-darktheme"
+private let checkmarkSymbolImageNameLight: String = "checkmark-symbol-whitetheme"
 private let XsymbolImageNameDark: String = "x-symbol-darktheme"
 private let XsymbolImageNameLight: String = "x-symbol-whitetheme"
 
 private struct Theme {
     var backgroundColor: UIColor
     var textColor: UIColor
+    var CheckmarkSymbolImageName: String
     var XsymbolImageName: String
 }
 
-private let darkTheme   = Theme(backgroundColor: darkColor,  textColor: lightColor, XsymbolImageName: XsymbolImageNameLight)
-private let lightTheme  = Theme(backgroundColor: lightColor, textColor: darkColor, XsymbolImageName: XsymbolImageNameDark)
+private let darkTheme   = Theme(backgroundColor: darkColor,
+                                textColor: lightColor,
+                                CheckmarkSymbolImageName: checkmarkSymbolImageNameLight,
+                                XsymbolImageName: XsymbolImageNameLight)
+private let lightTheme  = Theme(backgroundColor: lightColor,
+                                textColor: darkColor,
+                                CheckmarkSymbolImageName: checkmarkSymbolImageNameDark,
+                                XsymbolImageName: XsymbolImageNameDark)
 
 
 public enum CWProgressHUDStyle {
@@ -58,7 +67,7 @@ public class CWProgressHUD: NSObject {
     }()
     
     private static var hudImageView: UIImageView = {
-        let image = UIImageView(image: UIImage(named: selectedTheme.colors.XsymbolImageName))
+        let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFill
         return image
@@ -407,69 +416,12 @@ public class CWProgressHUD: NSObject {
     
     // ---------------------------------------------------------------------------------------------------------------- //
     
+    public class func showSuccess(withMessage message: String) {
+        displayProgressHUD(withMessage: message, usingImageName: selectedTheme.colors.CheckmarkSymbolImageName)
+    }
     
     public class func showError(withMessage message: String) {
-        if let window = UIApplication.shared.keyWindow {
-            
-            if isShowing == true {
-                dismiss()
-            }
-            isShowing = true
-            
-            windowWidth = window.frame.width
-            windowHeight = window.frame.height
-            halfViewSize = progressHUDWidthXHeight / 2
-            window.addSubview(self.progressHUDBackgroundView)
-            
-            progressHUDBackgroundView.addSubview(hudImageView)
-            progressHUDBackgroundView.addSubview(hudMessageLabel)
-            progressHUDBackgroundView.backgroundColor = selectedTheme.colors.backgroundColor
-            
-            
-            
-            
-            // Could have a variable height depending on message text
-            hudWidthAnchor = progressHUDBackgroundView.widthAnchor.constraint(equalToConstant: progressHUDWidthXHeight)
-            hudCenterXAnchor = progressHUDBackgroundView.centerXAnchor.constraint(equalTo: window.centerXAnchor)
-            hudCenterYAnchor = progressHUDBackgroundView.centerYAnchor.constraint(equalTo: window.centerYAnchor, constant: windowHeight)
-            hudWidthAnchor?.isActive = true
-            hudCenterXAnchor?.isActive = true
-            hudCenterYAnchor?.isActive = true
-            
-            self.progressHUDBackgroundView.superview?.layoutIfNeeded()
-            
-            // 120 - 80 = 40
-            hudImageView.widthAnchor.constraint(equalToConstant: progressHUDWidthXHeight - 80).isActive = true
-            hudImageView.heightAnchor.constraint(equalToConstant: progressHUDWidthXHeight - 80).isActive = true
-            hudImageView.centerXAnchor.constraint(equalTo: progressHUDBackgroundView.centerXAnchor).isActive = true
-            hudImageView.topAnchor.constraint(equalTo: progressHUDBackgroundView.topAnchor, constant: 16).isActive = true
-            
-            
-            
-            
-            
-            hudMessageLabel.text = message
-            hudMessageLabel.textColor = selectedTheme.colors.textColor
-            hudMessageLabel.leadingAnchor.constraint(equalTo: progressHUDBackgroundView.leadingAnchor, constant: 8).isActive = true
-            hudMessageLabel.topAnchor.constraint(equalTo: hudImageView.bottomAnchor, constant: 16).isActive = true
-            hudMessageLabel.trailingAnchor.constraint(equalTo: progressHUDBackgroundView.trailingAnchor, constant: -8).isActive = true
-            hudMessageLabel.bottomAnchor.constraint(equalTo: progressHUDBackgroundView.bottomAnchor, constant: -8).isActive = true
-            
-            
-            progressHUDBackgroundView.layoutIfNeeded()
-            
-            // Finally, animate the view onto screen by moving up the centerYAnchor
-            hudCenterYAnchor?.constant = 0
-            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.9, options: .curveEaseInOut, animations: {
-                
-                self.progressHUDBackgroundView.superview?.layoutIfNeeded()
-                
-            }, completion: { (completed) in
-                
-                timer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(self.dismiss), userInfo: nil, repeats: false)
-                
-            })
-        }
+        displayProgressHUD(withMessage: message, usingImageName: selectedTheme.colors.XsymbolImageName)
     }
     
     
@@ -535,23 +487,111 @@ public class CWProgressHUD: NSObject {
         }
     }
     
-    private class func loadImage(name: String) -> UIImage? {
-        let podBundle = Bundle(for: CWProgressHUD.self)
-        if let url = podBundle.url(forResource: "Resources", withExtension: "bundle") {
-            let bundle = Bundle(url: url)
-            return UIImage(named: name, in: bundle, compatibleWith: nil)
-        } else {
-        }
-        return nil
-    }
     
-    public class func dismissWithError(_ message: String) {
-        
-    }
+    
     
     // MARK: - Set style funcs
     
     public class func setStyle(_ style: CWProgressHUDStyle) {
         selectedTheme = style
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    private class func displayProgressHUD(withMessage message: String?, usingImageName imageName: String?) {
+        if let window = UIApplication.shared.keyWindow {
+            
+            if isShowing == true {
+                dismiss()
+            }
+            isShowing = true
+            
+            windowWidth = window.frame.width
+            windowHeight = window.frame.height
+            halfViewSize = progressHUDWidthXHeight / 2
+            window.addSubview(self.progressHUDBackgroundView)
+            
+            
+            
+            progressHUDBackgroundView.backgroundColor = selectedTheme.colors.backgroundColor
+            
+            
+            
+            
+            // Could have a variable height depending on message text
+            hudWidthAnchor = progressHUDBackgroundView.widthAnchor.constraint(equalToConstant: progressHUDWidthXHeight)
+            hudCenterXAnchor = progressHUDBackgroundView.centerXAnchor.constraint(equalTo: window.centerXAnchor)
+            hudCenterYAnchor = progressHUDBackgroundView.centerYAnchor.constraint(equalTo: window.centerYAnchor, constant: windowHeight)
+            hudWidthAnchor?.isActive = true
+            hudCenterXAnchor?.isActive = true
+            hudCenterYAnchor?.isActive = true
+            
+            self.progressHUDBackgroundView.superview?.layoutIfNeeded()
+            
+            if let imageNameConfirmed = imageName {
+                print("image confirmed: \(imageNameConfirmed)")
+                progressHUDBackgroundView.addSubview(hudImageView)
+                if let image = loadImage(withName: imageNameConfirmed) {
+                    print("image object: \(image)")
+                    hudImageView.image = image
+                }
+                
+                // 120 - 80 = 40
+                hudImageView.widthAnchor.constraint(equalToConstant: progressHUDWidthXHeight - 80).isActive = true
+                hudImageView.heightAnchor.constraint(equalToConstant: progressHUDWidthXHeight - 80).isActive = true
+                hudImageView.centerXAnchor.constraint(equalTo: progressHUDBackgroundView.centerXAnchor).isActive = true
+                hudImageView.topAnchor.constraint(equalTo: progressHUDBackgroundView.topAnchor, constant: 16).isActive = true
+                
+            }
+            
+            
+            
+            
+            if message != nil {
+                progressHUDBackgroundView.addSubview(hudMessageLabel)
+                hudMessageLabel.text = message
+                hudMessageLabel.textColor = selectedTheme.colors.textColor
+                hudMessageLabel.leadingAnchor.constraint(equalTo: progressHUDBackgroundView.leadingAnchor, constant: 8).isActive = true
+                hudMessageLabel.topAnchor.constraint(equalTo: hudImageView.bottomAnchor, constant: 16).isActive = true
+                hudMessageLabel.trailingAnchor.constraint(equalTo: progressHUDBackgroundView.trailingAnchor, constant: -8).isActive = true
+                hudMessageLabel.bottomAnchor.constraint(equalTo: progressHUDBackgroundView.bottomAnchor, constant: -8).isActive = true
+            }
+            
+            
+            progressHUDBackgroundView.layoutIfNeeded()
+            
+            // Finally, animate the view onto screen by moving up the centerYAnchor
+            hudCenterYAnchor?.constant = 0
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.9, options: .curveEaseInOut, animations: {
+                
+                self.progressHUDBackgroundView.superview?.layoutIfNeeded()
+                
+            }, completion: { (completed) in
+                
+                timer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(self.dismiss), userInfo: nil, repeats: false)
+                
+            })
+        }
+    }
+    
+    private class func loadImage(withName name: String) -> UIImage? {
+        let podBundle = Bundle(for: self.classForCoder())
+        if let bundleUrl = podBundle.url(forResource: "CWProgressHUD", withExtension: "bundle") {
+            if let bundle = Bundle(url: bundleUrl) {
+                return UIImage(named: name, in: bundle, compatibleWith: nil)
+            } else {
+                assertionFailure("Could not load the bundle")
+            }
+        } else {
+            assertionFailure("Could not create a path to the bundle")
+        }
+        return nil
     }
 }
