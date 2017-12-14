@@ -356,10 +356,10 @@ public class CWProgressHUD: NSObject {
                     
                 }, completion: nil)
                 
-                // After "timeToDismissProgressHUD" (which is 5.0 seconds), call the dismiss func
-                timer = Timer.scheduledTimer(timeInterval: timeToDismissProgressHUD, target: self, selector: #selector(self.dismiss), userInfo: nil, repeats: false)
-                
             }
+            
+            // After "timeToDismissProgressHUD" (which is 5.0 seconds), call the dismiss func
+            timer = Timer.scheduledTimer(timeInterval: timeToDismissProgressHUD, target: self, selector: #selector(self.dismiss), userInfo: nil, repeats: false)
         }
     }
     
