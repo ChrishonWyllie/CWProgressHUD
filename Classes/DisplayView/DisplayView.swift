@@ -156,6 +156,8 @@ public class CWProgressHUD: NSObject {
                     
                 }, completion: nil)
             }
+            
+            
         }
     }
     
@@ -193,12 +195,7 @@ public class CWProgressHUD: NSObject {
                     
                     self.progressHUDBackgroundView.superview?.layoutIfNeeded()
                     
-                }, completion: { (completed) in
-                    
-                    // After "timeToDismissProgressHUD" (which is 5.0 seconds), call the dismiss func
-                    //timer = Timer.scheduledTimer(timeInterval: timeToDismissProgressHUD, target: self, selector: #selector(self.dismiss), userInfo: nil, repeats: false)
-                    
-                })
+                }, completion: nil)
             }
         }
     }
@@ -329,13 +326,11 @@ public class CWProgressHUD: NSObject {
                     
                     self.progressHUDBackgroundView.superview?.layoutIfNeeded()
                     
-                }, completion: { (completed) in
-                    
-                    // After "timeToDismissProgressHUD" (which is 5.0 seconds), call the dismiss func
-                    timer = Timer.scheduledTimer(timeInterval: timeToDismissProgressHUD, target: self, selector: #selector(self.dismiss), userInfo: nil, repeats: false)
-                    
-                })
+                }, completion: nil)
             }
+            
+            // After "timeToDismissProgressHUD" (which is 5.0 seconds), call the dismiss func
+            timer = Timer.scheduledTimer(timeInterval: timeToDismissProgressHUD, target: self, selector: #selector(self.dismiss), userInfo: nil, repeats: false)
         }
     }
     
@@ -359,12 +354,11 @@ public class CWProgressHUD: NSObject {
                     
                     self.progressHUDBackgroundView.superview?.layoutIfNeeded()
                     
-                }, completion: { (completed) in
-                    
-                    // After "timeToDismissProgressHUD" (which is 5.0 seconds), call the dismiss func
-                    timer = Timer.scheduledTimer(timeInterval: timeToDismissProgressHUD, target: self, selector: #selector(self.dismiss), userInfo: nil, repeats: false)
-                    
-                })
+                }, completion: nil)
+                
+                // After "timeToDismissProgressHUD" (which is 5.0 seconds), call the dismiss func
+                timer = Timer.scheduledTimer(timeInterval: timeToDismissProgressHUD, target: self, selector: #selector(self.dismiss), userInfo: nil, repeats: false)
+                
             }
         }
     }

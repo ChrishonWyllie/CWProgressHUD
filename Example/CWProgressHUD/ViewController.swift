@@ -130,12 +130,7 @@ class ViewController: UIViewController {
         CWProgressHUD.dismiss()
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
-        view.backgroundColor = UIColor.groupTableViewBackground
-        
+    private func setupUIElements() {
         self.view.addSubview(progressHUDStyleSegmentedControl)
         self.view.addSubview(showProgressHUDButton)
         self.view.addSubview(showProgressHUDWithMessage)
@@ -183,11 +178,32 @@ class ViewController: UIViewController {
         dismissProgresHUDButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50).isActive = true
         dismissProgresHUDButton.widthAnchor.constraint(equalToConstant: 180).isActive = true
         dismissProgresHUDButton.heightAnchor.constraint(equalToConstant: 36).isActive = true
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
+        
+        view.backgroundColor = UIColor.groupTableViewBackground
+        
+        setupUIElements()
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        //CWProgressHUD.setStyle(.dark)
+        
+        //CWProgressHUD.show()
+        
+        //CWProgressHUD.show(withMessage: "Performing some time consuming task. Please wait...")
+        
+        //showWithProgress()
+
+        //CWProgressHUD.showSuccess(withMessage: "Successfully uploaded image!")
+        
+        //CWProgressHUD.showError(withMessage: "Could not perform (operation)")
     }
     
     override func didReceiveMemoryWarning() {
