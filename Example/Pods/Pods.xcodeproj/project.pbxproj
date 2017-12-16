@@ -121,7 +121,7 @@
 		247CE2E936891EC5F5B105AD3FEC2FA3 /* CWProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
-				66D312991FE4D6AF00D947DF /* Classes */,
+				666DE6051FE4D99000478245 /* Classes */,
 				73A651921A70248A2123EE12273A52B5 /* Support Files */,
 			);
 			name = CWProgressHUD;
@@ -163,6 +163,17 @@
 			path = "Target Support Files/Pods-CWProgressHUD_Tests";
 			sourceTree = "<group>";
 		};
+		666DE6051FE4D99000478245 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				A2CA7A0EA78A7B439C28D7526C8BD468 /* DisplayView */,
+				EEF66EBD674D8FDEFFB620CFE9D3FAE3 /* AnimatorView */,
+				66D312921FE3971600D947DF /* AnimatedCheckmarkView */,
+				66D312911FE396F700D947DF /* AnimatedErrorView */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
 		66D312911FE396F700D947DF /* AnimatedErrorView */ = {
 			isa = PBXGroup;
 			children = (
@@ -177,18 +188,6 @@
 				66D312951FE3974500D947DF /* AnimatedCheckmarkView.swift */,
 			);
 			path = AnimatedCheckmarkView;
-			sourceTree = "<group>";
-		};
-		66D312991FE4D6AF00D947DF /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				A2CA7A0EA78A7B439C28D7526C8BD468 /* DisplayView */,
-				EEF66EBD674D8FDEFFB620CFE9D3FAE3 /* AnimatorView */,
-				66D312921FE3971600D947DF /* AnimatedCheckmarkView */,
-				66D312911FE396F700D947DF /* AnimatedErrorView */,
-			);
-			name = Classes;
-			path = "New Group1";
 			sourceTree = "<group>";
 		};
 		73A651921A70248A2123EE12273A52B5 /* Support Files */ = {
