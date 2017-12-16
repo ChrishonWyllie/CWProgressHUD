@@ -121,10 +121,7 @@
 		247CE2E936891EC5F5B105AD3FEC2FA3 /* CWProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
-				A2CA7A0EA78A7B439C28D7526C8BD468 /* DisplayView */,
-				EEF66EBD674D8FDEFFB620CFE9D3FAE3 /* AnimatorView */,
-				66D312921FE3971600D947DF /* AnimatedCheckmarkView */,
-				66D312911FE396F700D947DF /* AnimatedErrorView */,
+				66D312991FE4D6AF00D947DF /* Classes */,
 				73A651921A70248A2123EE12273A52B5 /* Support Files */,
 			);
 			name = CWProgressHUD;
@@ -182,6 +179,18 @@
 			path = AnimatedCheckmarkView;
 			sourceTree = "<group>";
 		};
+		66D312991FE4D6AF00D947DF /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				A2CA7A0EA78A7B439C28D7526C8BD468 /* DisplayView */,
+				EEF66EBD674D8FDEFFB620CFE9D3FAE3 /* AnimatorView */,
+				66D312921FE3971600D947DF /* AnimatedCheckmarkView */,
+				66D312911FE396F700D947DF /* AnimatedErrorView */,
+			);
+			name = Classes;
+			path = "New Group1";
+			sourceTree = "<group>";
+		};
 		73A651921A70248A2123EE12273A52B5 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -231,8 +240,7 @@
 			children = (
 				73CFBCFB447F00D5C4DCF5E69A5970E7 /* DisplayView.swift */,
 			);
-			name = DisplayView;
-			path = Classes/DisplayView;
+			path = DisplayView;
 			sourceTree = "<group>";
 		};
 		C0E8F129B349C5CBF42683935EACA24B /* Targets Support Files */ = {
@@ -268,8 +276,7 @@
 			children = (
 				C732C0A59159A7813119C3547E50B06A /* AnimatorView.swift */,
 			);
-			name = AnimatorView;
-			path = Classes/AnimatorView;
+			path = AnimatorView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

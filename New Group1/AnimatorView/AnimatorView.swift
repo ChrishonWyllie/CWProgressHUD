@@ -18,7 +18,7 @@ import UIKit
     
     var progress: CGFloat? // Should be out of 1.0 (percent of 100)
     var previousStrokeEnd: CGFloat = 0.0
-    
+     
     override init(frame: CGRect) {
         super.init(frame: frame)
     }

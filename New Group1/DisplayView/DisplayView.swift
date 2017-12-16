@@ -19,7 +19,7 @@ private let checkmarkSymbolImageNameDark: String = "checkmark-symbol-darktheme"
 private let checkmarkSymbolImageNameLight: String = "checkmark-symbol-whitetheme"
 private let XsymbolImageNameDark: String = "x-symbol-darktheme"
 private let XsymbolImageNameLight: String = "x-symbol-whitetheme"
-
+ 
 private struct Theme {
     var backgroundColor: UIColor
     var textColor: UIColor
