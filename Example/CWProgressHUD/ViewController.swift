@@ -89,6 +89,7 @@ class ViewController: UIViewController {
     
     @objc private func showProgressHUDWithSuccess(_ sender: Any) {
         print("showing with success")
+        CWProgressHUD.createCustomStyle(withBackgroundColor: UIColor.red, andTextColor: UIColor.blue)
         CWProgressHUD.showSuccess(withMessage: "Successfully uploaded your image!")
     }
     

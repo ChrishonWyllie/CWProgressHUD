@@ -25,6 +25,22 @@ private struct Theme {
     var textColor: UIColor
     var CheckmarkSymbolImageName: String
     var XsymbolImageName: String
+    
+    init(backgroundColor: UIColor, textColor: UIColor, CheckmarkSymbolImageName: String, XsymbolImageName: String) {
+        self.backgroundColor = backgroundColor
+        self.textColor = textColor
+        self.CheckmarkSymbolImageName = CheckmarkSymbolImageName
+        self.XsymbolImageName = XsymbolImageName
+    }
+    
+    // Default initializer
+    init() {
+        self.backgroundColor = lightColor
+        self.textColor = darkColor
+        self.CheckmarkSymbolImageName = ""
+        self.XsymbolImageName = ""
+    }
+    
 }
 
 private let darkTheme   = Theme(backgroundColor: darkColor,
@@ -36,14 +52,17 @@ private let lightTheme  = Theme(backgroundColor: lightColor,
                                 CheckmarkSymbolImageName: checkmarkSymbolImageNameDark,
                                 XsymbolImageName: XsymbolImageNameDark)
 
+private var customTheme = Theme()
+
 
 public enum CWProgressHUDStyle {
-    case dark, light
+    case dark, light, custom
     
     fileprivate var colors: Theme {
         switch self {
         case .dark:  return darkTheme
         case .light: return lightTheme
+        case .custom: return customTheme
         }
     }
 }
@@ -115,7 +134,9 @@ public class CWProgressHUD: NSObject {
     private static var layerThreeHeightAnchor: NSLayoutConstraint?
     private static var layerThreeTopAnchor: NSLayoutConstraint?
     
+    private static var checkmarkView: AnimatedCheckmarkView!
     
+    private static var errorView: AnimatedErrorView!
     
     
     
@@ -306,35 +327,14 @@ public class CWProgressHUD: NSObject {
     
     
     public class func showSuccess(withMessage message: String) {
-        
-        if let window = UIApplication.shared.keyWindow {
-            
-            let dimensions: [String: CGFloat] = ["hudImageViewDimension": 40, "hudImageViewTopAnchorConstant": 16, "hudMessageLabelTopAnchorConstant": 64]
-            
-            
-            if isShowing == true {
-                
-                dismissImmediately()
-                
-                displayProgressHUD(withWindow: window, message: message, usingImageName: selectedTheme.colors.CheckmarkSymbolImageName, andLayoutDimensions: dimensions)
-                
-            } else {
-                
-                displayProgressHUD(withWindow: window, message: message, usingImageName: selectedTheme.colors.CheckmarkSymbolImageName, andLayoutDimensions: dimensions)
-                
-                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.9, options: .curveEaseInOut, animations: {
-                    
-                    self.progressHUDBackgroundView.superview?.layoutIfNeeded()
-                    
-                }, completion: nil)
-            }
-            
-            // After "timeToDismissProgressHUD" (which is 5.0 seconds), call the dismiss func
-            timer = Timer.scheduledTimer(timeInterval: timeToDismissProgressHUD, target: self, selector: #selector(self.dismiss), userInfo: nil, repeats: false)
-        }
+        handleDisplay(withMessage: message, andAnimatedViewTitle: selectedTheme.colors.CheckmarkSymbolImageName)
     }
     
     public class func showError(withMessage message: String) {
+        handleDisplay(withMessage: message, andAnimatedViewTitle: selectedTheme.colors.XsymbolImageName)
+    }
+    
+    private class func handleDisplay(withMessage message: String, andAnimatedViewTitle viewTitle: String) {
         if let window = UIApplication.shared.keyWindow {
             
             let dimensions: [String: CGFloat] = ["hudImageViewDimension": 40, "hudImageViewTopAnchorConstant": 16, "hudMessageLabelTopAnchorConstant": 64]
@@ -344,11 +344,11 @@ public class CWProgressHUD: NSObject {
                 
                 dismissImmediately()
                 
-                displayProgressHUD(withWindow: window, message: message, usingImageName: selectedTheme.colors.XsymbolImageName, andLayoutDimensions: dimensions)
+                displayProgressHUD(withWindow: window, message: message, usingImageName: viewTitle, andLayoutDimensions: dimensions)
                 
             } else {
                 
-                displayProgressHUD(withWindow: window, message: message, usingImageName: selectedTheme.colors.XsymbolImageName, andLayoutDimensions: dimensions)
+                displayProgressHUD(withWindow: window, message: message, usingImageName: viewTitle, andLayoutDimensions: dimensions)
                 
                 UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.9, options: .curveEaseInOut, animations: {
                     
@@ -362,8 +362,6 @@ public class CWProgressHUD: NSObject {
             timer = Timer.scheduledTimer(timeInterval: timeToDismissProgressHUD, target: self, selector: #selector(self.dismiss), userInfo: nil, repeats: false)
         }
     }
-    
-    
     
     
     
@@ -410,6 +408,26 @@ public class CWProgressHUD: NSObject {
         selectedTheme = style
     }
     
+    public class func createCustomStyle(withBackgroundColor backgroundColor: UIColor, andTextColor textColor: UIColor) {
+        
+        customTheme.backgroundColor = backgroundColor
+        customTheme.textColor = textColor
+        customTheme.CheckmarkSymbolImageName = selectedTheme.colors.CheckmarkSymbolImageName
+        customTheme.XsymbolImageName = selectedTheme.colors.XsymbolImageName
+        
+        selectedTheme = .custom
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -449,6 +467,62 @@ public class CWProgressHUD: NSObject {
         // If an imageName was passed in, display with hudImageView
         if let imageNameConfirmed = imageName {
             
+            print("image name: \(imageNameConfirmed)")
+            
+            switch imageNameConfirmed {
+            case "checkmark-symbol-darktheme", "checkmark-symbol-whitetheme":
+                
+                checkmarkView = AnimatedCheckmarkView()
+                checkmarkView.translatesAutoresizingMaskIntoConstraints = false
+                
+                checkmarkView.animationLayerColor = selectedTheme.colors.textColor
+                
+                print("selected theme text color: \(selectedTheme.colors.textColor)")
+                print("checkmark animationLayerColor: \(checkmarkView.animationLayerColor)")
+                
+                progressHUDBackgroundView.addSubview(checkmarkView)
+                
+                
+                
+                let hudImageViewDimension = dimensions["hudImageViewDimension"]
+                let hudImageViewTopAnchorConstant = dimensions["hudImageViewTopAnchorConstant"]
+                
+                checkmarkView.widthAnchor.constraint(equalToConstant: hudImageViewDimension!).isActive = true
+                checkmarkView.heightAnchor.constraint(equalToConstant: hudImageViewDimension!).isActive = true
+                checkmarkView.centerXAnchor.constraint(equalTo: progressHUDBackgroundView.centerXAnchor).isActive = true
+                checkmarkView.topAnchor.constraint(equalTo: progressHUDBackgroundView.topAnchor, constant: hudImageViewTopAnchorConstant!).isActive = true
+                
+                checkmarkView.beginAnimation()
+                
+                
+            case "x-symbol-darktheme", "x-symbol-whitetheme":
+                
+                errorView = AnimatedErrorView()
+                errorView.translatesAutoresizingMaskIntoConstraints = false
+                
+                errorView.animationLayerColor = selectedTheme.colors.textColor
+                
+                print("selected theme text color: \(selectedTheme.colors.textColor)")
+                print("errorView animationLayerColor: \(errorView.animationLayerColor)")
+                
+                progressHUDBackgroundView.addSubview(errorView)
+                
+                
+                
+                let hudImageViewDimension = dimensions["hudImageViewDimension"]
+                let hudImageViewTopAnchorConstant = dimensions["hudImageViewTopAnchorConstant"]
+                
+                errorView.widthAnchor.constraint(equalToConstant: hudImageViewDimension!).isActive = true
+                errorView.heightAnchor.constraint(equalToConstant: hudImageViewDimension!).isActive = true
+                errorView.centerXAnchor.constraint(equalTo: progressHUDBackgroundView.centerXAnchor).isActive = true
+                errorView.topAnchor.constraint(equalTo: progressHUDBackgroundView.topAnchor, constant: hudImageViewTopAnchorConstant!).isActive = true
+                
+                errorView.beginAnimation()
+                
+            default: break
+            }
+            
+            /*
             progressHUDBackgroundView.addSubview(hudImageView)
             
             if let image = loadImage(withName: imageNameConfirmed) {
@@ -462,8 +536,10 @@ public class CWProgressHUD: NSObject {
             hudImageView.heightAnchor.constraint(equalToConstant: hudImageViewDimension!).isActive = true
             hudImageView.centerXAnchor.constraint(equalTo: progressHUDBackgroundView.centerXAnchor).isActive = true
             hudImageView.topAnchor.constraint(equalTo: progressHUDBackgroundView.topAnchor, constant: hudImageViewTopAnchorConstant!).isActive = true
+            */
             
         } else {
+            
             
             // Otherwise, display with AnimatorView
             

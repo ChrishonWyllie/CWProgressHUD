@@ -9,18 +9,14 @@
 /* Begin PBXBuildFile section */
 		07859EC78B3C468CE342A36F63F37C90 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88AAE1F92055A60CC2FC970D7D34634 /* Foundation.framework */; };
 		0D62BC60EF8EF26F141E183831BDC203 /* CWProgressHUD-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 31178AAB7924CB7597AC10500076861A /* CWProgressHUD-dummy.m */; };
-		154A7D236622845181AA4F085076AEFD /* x-symbol-whitetheme.png in Resources */ = {isa = PBXBuildFile; fileRef = 232FC45B1968FACC68A8D92ECDB1294D /* x-symbol-whitetheme.png */; };
 		26F65AD74211FB6D0E026C607084A371 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88AAE1F92055A60CC2FC970D7D34634 /* Foundation.framework */; };
 		2B2C013C19A41041983946E4B0E3D5B1 /* CWProgressHUD-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 40EA1F76DFB9AD8EBD5F65B536B5E98E /* CWProgressHUD-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		325DD7BA45D042D8160ADAB5F1BE38FC /* CWProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9C645586876FB7930DF18CC56130BA87 /* CWProgressHUD.bundle */; };
 		35B513678FA15AD68092EA3724411BD1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B63C6A64CF66340668996F78DA6BB482 /* UIKit.framework */; };
-		3A7214F19C3CCFAF5B7BFC19723202BC /* x-symbol-darktheme.png in Resources */ = {isa = PBXBuildFile; fileRef = 30F584CF62DFF7AF0A35709849507F52 /* x-symbol-darktheme.png */; };
 		5880E720AC974F46360D87E86F71ABA3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88AAE1F92055A60CC2FC970D7D34634 /* Foundation.framework */; };
 		64FACC23CA623E4EC303BFF049A7D370 /* AnimatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C732C0A59159A7813119C3547E50B06A /* AnimatorView.swift */; };
-		666771021FBFECAB00F1D96A /* checkmark-symbol-whitetheme.png in Resources */ = {isa = PBXBuildFile; fileRef = 666771001FBFECAB00F1D96A /* checkmark-symbol-whitetheme.png */; };
-		666771031FBFECAB00F1D96A /* checkmark-symbol-darktheme.png in Resources */ = {isa = PBXBuildFile; fileRef = 666771011FBFECAB00F1D96A /* checkmark-symbol-darktheme.png */; };
-		666771041FBFED2700F1D96A /* checkmark-symbol-whitetheme.png in Resources */ = {isa = PBXBuildFile; fileRef = 666771001FBFECAB00F1D96A /* checkmark-symbol-whitetheme.png */; };
-		666771051FBFED2A00F1D96A /* checkmark-symbol-darktheme.png in Resources */ = {isa = PBXBuildFile; fileRef = 666771011FBFECAB00F1D96A /* checkmark-symbol-darktheme.png */; };
+		66D312941FE3972F00D947DF /* AnimatedErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D312931FE3972F00D947DF /* AnimatedErrorView.swift */; };
+		66D312961FE3974500D947DF /* AnimatedCheckmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D312951FE3974500D947DF /* AnimatedCheckmarkView.swift */; };
 		7E566A3CADFF9992B422EC9FA489B20F /* Pods-CWProgressHUD_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 02E9F9C1321D1E8A1E3D480FCCC924E8 /* Pods-CWProgressHUD_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7E8793B5E25AA8689CF84654B5B20DE0 /* Pods-CWProgressHUD_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 31D7AE675EBD1B0FA4DF0BB61C4A9969 /* Pods-CWProgressHUD_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7F11DACE490F124F963677EEB458B997 /* Pods-CWProgressHUD_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C1D69DEEC84181DAA11D1BEB8282947 /* Pods-CWProgressHUD_Tests-dummy.m */; };
@@ -47,12 +43,10 @@
 
 /* Begin PBXFileReference section */
 		02E9F9C1321D1E8A1E3D480FCCC924E8 /* Pods-CWProgressHUD_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-CWProgressHUD_Example-umbrella.h"; sourceTree = "<group>"; };
-		232FC45B1968FACC68A8D92ECDB1294D /* x-symbol-whitetheme.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "x-symbol-whitetheme.png"; path = "Resources/x-symbol-whitetheme.png"; sourceTree = "<group>"; };
 		2C1D69DEEC84181DAA11D1BEB8282947 /* Pods-CWProgressHUD_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-CWProgressHUD_Tests-dummy.m"; sourceTree = "<group>"; };
 		2ECACC786CE20158DF665A8FE5621667 /* Pods_CWProgressHUD_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CWProgressHUD_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F5FB0434406CAF04E201EDF1704478F /* Pods-CWProgressHUD_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-CWProgressHUD_Tests.modulemap"; sourceTree = "<group>"; };
 		2FFCA319853FB500DEA57DF892EB8E8D /* CWProgressHUD.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = CWProgressHUD.modulemap; sourceTree = "<group>"; };
-		30F584CF62DFF7AF0A35709849507F52 /* x-symbol-darktheme.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "x-symbol-darktheme.png"; path = "Resources/x-symbol-darktheme.png"; sourceTree = "<group>"; };
 		31178AAB7924CB7597AC10500076861A /* CWProgressHUD-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CWProgressHUD-dummy.m"; sourceTree = "<group>"; };
 		3164B8B31B09FAD3B9CF92CE52F41B1A /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		31D7AE675EBD1B0FA4DF0BB61C4A9969 /* Pods-CWProgressHUD_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-CWProgressHUD_Tests-umbrella.h"; sourceTree = "<group>"; };
@@ -61,8 +55,8 @@
 		4497790A10BD493333A0CF7AF2709F26 /* Pods-CWProgressHUD_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-CWProgressHUD_Example.modulemap"; sourceTree = "<group>"; };
 		450B537FD8DB55C395CEA8607AAC03CD /* Pods-CWProgressHUD_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-CWProgressHUD_Example-frameworks.sh"; sourceTree = "<group>"; };
 		5CD09CE66F5FD0D6501FFA21310AA9D0 /* Pods-CWProgressHUD_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-CWProgressHUD_Tests-frameworks.sh"; sourceTree = "<group>"; };
-		666771001FBFECAB00F1D96A /* checkmark-symbol-whitetheme.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkmark-symbol-whitetheme.png"; sourceTree = "<group>"; };
-		666771011FBFECAB00F1D96A /* checkmark-symbol-darktheme.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkmark-symbol-darktheme.png"; sourceTree = "<group>"; };
+		66D312931FE3972F00D947DF /* AnimatedErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedErrorView.swift; sourceTree = "<group>"; };
+		66D312951FE3974500D947DF /* AnimatedCheckmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedCheckmarkView.swift; sourceTree = "<group>"; };
 		73CFBCFB447F00D5C4DCF5E69A5970E7 /* DisplayView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DisplayView.swift; sourceTree = "<group>"; };
 		88EEAA089CEDD51D45A0A285AB3A278A /* Pods-CWProgressHUD_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CWProgressHUD_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
 		91C767BE99D3B895A7901160640FAFBA /* Pods-CWProgressHUD_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CWProgressHUD_Tests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -124,23 +118,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		01DB4A9F6FA0978E56E007F42E532264 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				666771011FBFECAB00F1D96A /* checkmark-symbol-darktheme.png */,
-				666771001FBFECAB00F1D96A /* checkmark-symbol-whitetheme.png */,
-				30F584CF62DFF7AF0A35709849507F52 /* x-symbol-darktheme.png */,
-				232FC45B1968FACC68A8D92ECDB1294D /* x-symbol-whitetheme.png */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
 		247CE2E936891EC5F5B105AD3FEC2FA3 /* CWProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
-				EEF66EBD674D8FDEFFB620CFE9D3FAE3 /* AnimatorView */,
 				A2CA7A0EA78A7B439C28D7526C8BD468 /* DisplayView */,
-				01DB4A9F6FA0978E56E007F42E532264 /* Resources */,
+				EEF66EBD674D8FDEFFB620CFE9D3FAE3 /* AnimatorView */,
+				66D312921FE3971600D947DF /* AnimatedCheckmarkView */,
+				66D312911FE396F700D947DF /* AnimatedErrorView */,
 				73A651921A70248A2123EE12273A52B5 /* Support Files */,
 			);
 			name = CWProgressHUD;
@@ -180,6 +164,22 @@
 			);
 			name = "Pods-CWProgressHUD_Tests";
 			path = "Target Support Files/Pods-CWProgressHUD_Tests";
+			sourceTree = "<group>";
+		};
+		66D312911FE396F700D947DF /* AnimatedErrorView */ = {
+			isa = PBXGroup;
+			children = (
+				66D312931FE3972F00D947DF /* AnimatedErrorView.swift */,
+			);
+			path = AnimatedErrorView;
+			sourceTree = "<group>";
+		};
+		66D312921FE3971600D947DF /* AnimatedCheckmarkView */ = {
+			isa = PBXGroup;
+			children = (
+				66D312951FE3974500D947DF /* AnimatedCheckmarkView.swift */,
+			);
+			path = AnimatedCheckmarkView;
 			sourceTree = "<group>";
 		};
 		73A651921A70248A2123EE12273A52B5 /* Support Files */ = {
@@ -413,8 +413,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				325DD7BA45D042D8160ADAB5F1BE38FC /* CWProgressHUD.bundle in Resources */,
-				666771021FBFECAB00F1D96A /* checkmark-symbol-whitetheme.png in Resources */,
-				666771031FBFECAB00F1D96A /* checkmark-symbol-darktheme.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,10 +420,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				666771041FBFED2700F1D96A /* checkmark-symbol-whitetheme.png in Resources */,
-				3A7214F19C3CCFAF5B7BFC19723202BC /* x-symbol-darktheme.png in Resources */,
-				154A7D236622845181AA4F085076AEFD /* x-symbol-whitetheme.png in Resources */,
-				666771051FBFED2A00F1D96A /* checkmark-symbol-darktheme.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -453,6 +447,8 @@
 			files = (
 				64FACC23CA623E4EC303BFF049A7D370 /* AnimatorView.swift in Sources */,
 				0D62BC60EF8EF26F141E183831BDC203 /* CWProgressHUD-dummy.m in Sources */,
+				66D312941FE3972F00D947DF /* AnimatedErrorView.swift in Sources */,
+				66D312961FE3974500D947DF /* AnimatedCheckmarkView.swift in Sources */,
 				A62813BF91B8BA7E5E767B1C6C633EF5 /* DisplayView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
