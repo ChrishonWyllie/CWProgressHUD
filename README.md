@@ -56,8 +56,7 @@ CWProgressHUD.setStyle(.dark)
 
 ```swift
 CWProgressHUD.createCustomStyle(withBackgroundColor: UIColor(red: 80/255, green: 45/255, blue: 12/255, alpha: 1.0),
-
-andTextColor: UIColor(red: 20/255, green: 15/255, blue: 12/255, alpha: 1.0))
+                                andTextColor: UIColor(red: 20/255, green: 15/255, blue: 12/255, alpha: 1.0))
 
 CWProgressHUD.showSuccess(withMessage: "Successfully uploaded your image!")
 ```
