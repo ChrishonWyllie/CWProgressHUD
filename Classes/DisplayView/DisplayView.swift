@@ -521,7 +521,7 @@ public class CWProgressHUD: NSObject {
         // If an imageName was passed in, display with hudImageView
         if let imageNameConfirmed = imageName {
             
-            print("image name: \(imageNameConfirmed)")
+            //print("image name: \(imageNameConfirmed)")
             
             switch imageNameConfirmed {
             case "checkmark-symbol-darktheme", "checkmark-symbol-whitetheme":
@@ -531,8 +531,6 @@ public class CWProgressHUD: NSObject {
                 
                 checkmarkView.animationLayerColor = selectedTheme.colors.textColor
                 
-                print("selected theme text color: \(selectedTheme.colors.textColor)")
-                print("checkmark animationLayerColor: \(checkmarkView.animationLayerColor)")
                 
                 progressHUDBackgroundView.addSubview(checkmarkView)
                 
@@ -555,9 +553,6 @@ public class CWProgressHUD: NSObject {
                 errorView.translatesAutoresizingMaskIntoConstraints = false
                 
                 errorView.animationLayerColor = selectedTheme.colors.textColor
-                
-                print("selected theme text color: \(selectedTheme.colors.textColor)")
-                print("errorView animationLayerColor: \(errorView.animationLayerColor)")
                 
                 progressHUDBackgroundView.addSubview(errorView)
                 
@@ -656,10 +651,7 @@ public class CWProgressHUD: NSObject {
             self.hudHeightAnchor = nil
             hudMessageLabel.text = message
             hudMessageLabel.textColor = selectedTheme.colors.textColor
-            
-            print("hud message label number of lines: \(hudMessageLabel.numberOfLines)")
-            print("hud height anchor: \(hudHeightAnchor)")
-            print("hud height anchor constant: \(hudHeightAnchor?.constant)")
+
             
             progressHUDBackgroundView.addSubview(hudMessageLabel)
             
@@ -673,9 +665,6 @@ public class CWProgressHUD: NSObject {
         } else {
             
             hudHeightAnchor?.isActive = true
-            
-            //print("hud height anchor: \(hudHeightAnchor)")
-            //print("hud height anchor constant: \(hudHeightAnchor?.constant)")
             
         }
         
