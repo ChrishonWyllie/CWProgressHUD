@@ -19,7 +19,7 @@ private let checkmarkSymbolImageNameDark: String = "checkmark-symbol-darktheme"
 private let checkmarkSymbolImageNameLight: String = "checkmark-symbol-whitetheme"
 private let XsymbolImageNameDark: String = "x-symbol-darktheme"
 private let XsymbolImageNameLight: String = "x-symbol-whitetheme"
- 
+
 private struct Theme {
     var backgroundColor: UIColor
     var textColor: UIColor
@@ -150,181 +150,52 @@ public class CWProgressHUD: NSObject {
     
     
     
+    
+    
+    
+    
     // MARK: - Show functions
     
     public class func show() {
         
-        if let window = UIApplication.shared.keyWindow {
-            
-            let dimensions: [String: CGFloat] = ["layerOneDimension": 80, "layerOneTopAnchorConstant": 20,
-                                                 "layerTwoDimension": 70, "layerTwoTopAnchorConstant": 25,
-                                                 "layerThreeDimension": 60, "layerThreeTopAnchorConstant": 30
-                                                ]
-            
-            if isShowing == true {
-                
-                dismissImmediately()
-                
-                displayProgressHUD(withWindow: window, message: nil, usingImageName: nil, andLayoutDimensions: dimensions)
-                
-            } else {
-                
-                displayProgressHUD(withWindow: window, message: nil, usingImageName: nil, andLayoutDimensions: dimensions)
-                
-                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.9, options: .curveEaseInOut, animations: {
-                    
-                    self.progressHUDBackgroundView.superview?.layoutIfNeeded()
-                    
-                }, completion: nil)
-            }
-            
-            
-        }
+        let dimensions: [String: CGFloat] = ["layerOneDimension": 80, "layerOneTopAnchorConstant": 20,
+                                             "layerTwoDimension": 70, "layerTwoTopAnchorConstant": 25,
+                                             "layerThreeDimension": 60, "layerThreeTopAnchorConstant": 30
+                                            ]
+        
+        handleDisplay(withDimensions: dimensions, andMessage: nil)
+        
     }
-    
-    
-    
-    
-    
-    // ---------------------------------------------------------------------------------------------------------------- //
-    
-    
-    
     
     public class func show(withMessage message: String) {
         
-        if let window = UIApplication.shared.keyWindow {
-            
-            let dimensions: [String: CGFloat] = ["layerOneDimension": 60, "layerOneTopAnchorConstant": 8,
-                                                 "layerTwoDimension": 50, "layerTwoTopAnchorConstant": 13,
-                                                 "layerThreeDimension": 40, "layerThreeTopAnchorConstant": 18,
-                                                 "hudMessageLabelTopAnchorConstant": 76
-            ]
-            
-            
-            if isShowing == true {
-                
-                dismissImmediately()
-            
-                displayProgressHUD(withWindow: window, message: message, usingImageName: nil, andLayoutDimensions: dimensions)
-            
-            } else {
-                
-                displayProgressHUD(withWindow: window, message: message, usingImageName: nil, andLayoutDimensions: dimensions)
-                
-                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.9, options: .curveEaseInOut, animations: {
-                    
-                    self.progressHUDBackgroundView.superview?.layoutIfNeeded()
-                    
-                }, completion: nil)
-            }
-        }
+        let dimensions: [String: CGFloat] = ["layerOneDimension": 60, "layerOneTopAnchorConstant": 8,
+                                             "layerTwoDimension": 50, "layerTwoTopAnchorConstant": 13,
+                                             "layerThreeDimension": 40, "layerThreeTopAnchorConstant": 18,
+                                             "hudMessageLabelTopAnchorConstant": 76
+                                            ]
+        
+        handleDisplay(withDimensions: dimensions, andMessage: message)
+        
     }
     
     
     
     
-    // ---------------------------------------------------------------------------------------------------------------- //
     
     
+    // MARK: - Show withProgress
     
-    
-    public class func show(withProgress progress: CGFloat) {
+    public class func show(withProgress progress: CGFloat, andMessage message: String?) {
         
-        spinnersGroup = [layerOneSpinnerView]
+        handleDisplay(withProgress: progress, andMessage: message)
         
-        if let window = UIApplication.shared.keyWindow {
-            
-            windowWidth = window.frame.width
-            windowHeight = window.frame.height
-            halfViewSize = progressHUDWidthXHeight / 2
-            
-            hudWidthAnchor = progressHUDBackgroundView.widthAnchor.constraint(equalToConstant: progressHUDWidthXHeight)
-            hudCenterXAnchor = progressHUDBackgroundView.centerXAnchor.constraint(equalTo: window.centerXAnchor)
-            hudCenterYAnchor = progressHUDBackgroundView.centerYAnchor.constraint(equalTo: window.centerYAnchor, constant: windowHeight)
-            
-            
-            
-            
-            if isShowing == true {
-                let _ = spinnersGroup.map {
-                    $0.layer.strokeEnd = $0.previousStrokeEnd
-                    $0.updateProgressAnimation(toProgress: progress)
-                    
-                }
-                
-                // WARNING!
-                // This may never get called. Possible reason? : since the timer is invalidated at 1.0
-                if progress >= 1.0 {
-                    dismiss()
-                }
-                
-            } else {
-                
-                // Show the ProgressHUD for the first time
-                // Configure constraints and set up animations
-                
-                
-                isShowing = true
-                window.addSubview(self.progressHUDBackgroundView)
-                progressHUDBackgroundView.addSubview(hudMessageLabel)
-                
-                hudWidthAnchor?.isActive = true
-                hudCenterXAnchor?.isActive = true
-                hudCenterYAnchor?.isActive = true
-                
-                self.progressHUDBackgroundView.superview?.layoutIfNeeded()
-                
-                
-                let _ = spinnersGroup.map {
-                    progressHUDBackgroundView.addSubview($0)
-                    $0.layer.strokeColor = selectedTheme.colors.textColor.cgColor
-                    
-                    $0.layer.removeAllAnimations()
-                    $0.layer.strokeStart = 0.0
-                    $0.animationDuration = 0.4
-                    $0.progress = progress
-                    $0.updateProgressAnimation(toProgress: progress)
-                    $0.translatesAutoresizingMaskIntoConstraints = false
-                    $0.centerXAnchor.constraint(equalTo: progressHUDBackgroundView.centerXAnchor).isActive = true
-                }
-                
-                layerOneWidthAnchor = layerOneSpinnerView.widthAnchor.constraint(equalToConstant: progressHUDWidthXHeight - 60)
-                layerOneHeightAnchor = layerOneSpinnerView.heightAnchor.constraint(equalToConstant: progressHUDWidthXHeight - 60)
-                layerOneTopAnchor = layerOneSpinnerView.topAnchor.constraint(equalTo: progressHUDBackgroundView.topAnchor, constant: 8)
-                layerOneWidthAnchor?.isActive = true
-                layerOneHeightAnchor?.isActive = true
-                layerOneTopAnchor?.isActive = true
-                
-                
-                hudMessageLabel.text = "Loading..."
-                hudMessageLabel.textColor = selectedTheme.colors.textColor
-                hudMessageLabel.leadingAnchor.constraint(equalTo: progressHUDBackgroundView.leadingAnchor, constant: 8).isActive = true
-                hudMessageLabel.topAnchor.constraint(equalTo: progressHUDBackgroundView.topAnchor, constant: 76).isActive = true
-                hudMessageLabel.trailingAnchor.constraint(equalTo: progressHUDBackgroundView.trailingAnchor, constant: -8).isActive = true
-                hudMessageLabel.bottomAnchor.constraint(equalTo: progressHUDBackgroundView.bottomAnchor, constant: -8).isActive = true
-                hudMessageLabel.textColor = selectedTheme.colors.textColor
-                
-                progressHUDBackgroundView.layoutIfNeeded()
-                
-                // Finally, animate the view onto screen by moving up the centerYAnchor
-                hudCenterYAnchor?.constant = 0
-                UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveLinear, animations: {
-                    
-                    self.progressHUDBackgroundView.superview?.layoutIfNeeded()
-                    
-                }, completion: nil)
-            }
-        }
     }
     
     
     
     
-    // ---------------------------------------------------------------------------------------------------------------- //
-    
-    
-    
+    // MARK: - Success/Error functions
     
     public class func showSuccess(withMessage message: String) {
         handleDisplay(withMessage: message, andAnimatedViewTitle: selectedTheme.colors.CheckmarkSymbolImageName)
@@ -334,34 +205,7 @@ public class CWProgressHUD: NSObject {
         handleDisplay(withMessage: message, andAnimatedViewTitle: selectedTheme.colors.XsymbolImageName)
     }
     
-    private class func handleDisplay(withMessage message: String, andAnimatedViewTitle viewTitle: String) {
-        if let window = UIApplication.shared.keyWindow {
-            
-            let dimensions: [String: CGFloat] = ["hudImageViewDimension": 40, "hudImageViewTopAnchorConstant": 16, "hudMessageLabelTopAnchorConstant": 64]
-            
-            
-            if isShowing == true {
-                
-                dismissImmediately()
-                
-                displayProgressHUD(withWindow: window, message: message, usingImageName: viewTitle, andLayoutDimensions: dimensions)
-                
-            } else {
-                
-                displayProgressHUD(withWindow: window, message: message, usingImageName: viewTitle, andLayoutDimensions: dimensions)
-                
-                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.9, options: .curveEaseInOut, animations: {
-                    
-                    self.progressHUDBackgroundView.superview?.layoutIfNeeded()
-                    
-                }, completion: nil)
-                
-            }
-            
-            // After "timeToDismissProgressHUD" (which is 5.0 seconds), call the dismiss func
-            timer = Timer.scheduledTimer(timeInterval: timeToDismissProgressHUD, target: self, selector: #selector(self.dismiss), userInfo: nil, repeats: false)
-        }
-    }
+    
     
     
     
@@ -402,6 +246,11 @@ public class CWProgressHUD: NSObject {
     
     
     
+    
+    
+    
+    
+    
     // MARK: - Set style funcs
     
     public class func setStyle(_ style: CWProgressHUDStyle) {
@@ -435,8 +284,213 @@ public class CWProgressHUD: NSObject {
     
     
     // MARK: - Modular functions
+    // These functions are called in the above functions but with conditional outcomes.
+    // For example, if a non-nil message (String) was passed in, it means the .show(withMessage:) function is the caller and not the .show() function
     
-    // Called in .show() ____ .show(withMessage:) ____ .showSuccess(withMessage:) and .showError(withMessage:)
+    
+    
+    // Called in .show() and .show(withMessage:)
+    
+    private class func handleDisplay(withDimensions dimensions: [String: CGFloat], andMessage message: String?) {
+        
+        if let window = UIApplication.shared.keyWindow {
+            
+            guard let layerOneDimension = dimensions["layerOneDimension"],
+                let layerTwoDimension = dimensions["layerTwoDimension"],
+                let layerThreeDimension = dimensions["layerThreeDimension"],
+                let layerOneTopAnchorConstant = dimensions["layerOneTopAnchorConstant"],
+                let layerTwoTopAnchorConstant = dimensions["layerTwoTopAnchorConstant"],
+                let layerThreeTopAnchorConstant = dimensions["layerThreeTopAnchorConstant"]
+                else { return }
+            
+            var layoutDimensions: [String: CGFloat] = ["layerOneDimension": layerOneDimension, "layerOneTopAnchorConstant": layerOneTopAnchorConstant,
+                                                       "layerTwoDimension": layerTwoDimension, "layerTwoTopAnchorConstant": layerTwoTopAnchorConstant,
+                                                       "layerThreeDimension": layerThreeDimension, "layerThreeTopAnchorConstant": layerThreeTopAnchorConstant
+            ]
+            
+            
+            if isShowing == true {
+                
+                dismissImmediately()
+                
+                // A message was passed in. The .show(withMessage:) is calling this function
+                if let hudMessageLabelTopAnchorConstant = dimensions["hudMessageLabelTopAnchorConstant"], let messageConfirmed = message {
+                    layoutDimensions["hudMessageLabelTopAnchorConstant"] = hudMessageLabelTopAnchorConstant
+                    displayProgressHUD(withWindow: window, message: messageConfirmed, usingImageName: nil, andLayoutDimensions: dimensions)
+                } else {
+                    // No message. Default show() is calling this function
+                    displayProgressHUD(withWindow: window, message: nil, usingImageName: nil, andLayoutDimensions: dimensions)
+                }
+                
+            } else {
+                
+                // A message was passed in. The .show(withMessage:) is calling this function
+                if let hudMessageLabelTopAnchorConstant = dimensions["hudMessageLabelTopAnchorConstant"], let messageConfirmed = message {
+                    layoutDimensions["hudMessageLabelTopAnchorConstant"] = hudMessageLabelTopAnchorConstant
+                    displayProgressHUD(withWindow: window, message: messageConfirmed, usingImageName: nil, andLayoutDimensions: dimensions)
+                } else {
+                    // No message. Default show() is calling this function
+                    displayProgressHUD(withWindow: window, message: nil, usingImageName: nil, andLayoutDimensions: dimensions)
+                }
+                
+                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.9, options: .curveEaseInOut, animations: {
+                    
+                    self.progressHUDBackgroundView.superview?.layoutIfNeeded()
+                    
+                }, completion: nil)
+            }
+        }
+    }
+    
+    
+    
+    
+    
+    // Called in .show(withProgress:andMessage:)
+    
+    private class func handleDisplay(withProgress progress: CGFloat, andMessage message: String?) {
+        spinnersGroup = [layerOneSpinnerView]
+        
+        if let window = UIApplication.shared.keyWindow {
+            
+            windowWidth = window.frame.width
+            windowHeight = window.frame.height
+            halfViewSize = progressHUDWidthXHeight / 2
+            
+            hudWidthAnchor = progressHUDBackgroundView.widthAnchor.constraint(equalToConstant: progressHUDWidthXHeight)
+            hudHeightAnchor = progressHUDBackgroundView.heightAnchor.constraint(equalToConstant: progressHUDWidthXHeight)
+            hudCenterXAnchor = progressHUDBackgroundView.centerXAnchor.constraint(equalTo: window.centerXAnchor)
+            hudCenterYAnchor = progressHUDBackgroundView.centerYAnchor.constraint(equalTo: window.centerYAnchor, constant: windowHeight)
+            
+            
+            
+            
+            if isShowing == true {
+                
+                let _ = spinnersGroup.map {
+                    $0.layer.strokeEnd = $0.previousStrokeEnd
+                    $0.updateProgressAnimation(toProgress: progress)
+                }
+                
+                // WARNING!
+                // This may never get called. Possible reason? : since the timer is invalidated at 1.0
+                if progress >= 1.0 {
+                    dismiss()
+                }
+                
+            } else {
+                
+                // Show the ProgressHUD for the first time
+                // Configure constraints and set up animations
+                
+                isShowing = true
+                window.addSubview(self.progressHUDBackgroundView)
+                
+                
+                hudWidthAnchor?.isActive = true
+                hudCenterXAnchor?.isActive = true
+                hudCenterYAnchor?.isActive = true
+                
+                self.progressHUDBackgroundView.superview?.layoutIfNeeded()
+                
+                
+                let _ = spinnersGroup.map {
+                    progressHUDBackgroundView.addSubview($0)
+                    $0.layer.strokeColor = selectedTheme.colors.textColor.cgColor
+                    
+                    $0.layer.removeAllAnimations()
+                    $0.layer.strokeStart = 0.0
+                    $0.animationDuration = 0.4
+                    $0.progress = progress
+                    $0.updateProgressAnimation(toProgress: progress)
+                    $0.translatesAutoresizingMaskIntoConstraints = false
+                    $0.centerXAnchor.constraint(equalTo: progressHUDBackgroundView.centerXAnchor).isActive = true
+                }
+                
+                if let messageConfirmed = message {
+                    
+                    hudHeightAnchor?.isActive = false
+                    hudHeightAnchor = nil
+                    layerOneWidthAnchor = layerOneSpinnerView.widthAnchor.constraint(equalToConstant: progressHUDWidthXHeight - 60)
+                    layerOneHeightAnchor = layerOneSpinnerView.heightAnchor.constraint(equalToConstant: progressHUDWidthXHeight - 60)
+                    layerOneTopAnchor = layerOneSpinnerView.topAnchor.constraint(equalTo: progressHUDBackgroundView.topAnchor, constant: 8)
+                    
+                    
+                    progressHUDBackgroundView.addSubview(hudMessageLabel)
+                    hudMessageLabel.text = messageConfirmed
+                    hudMessageLabel.textColor = selectedTheme.colors.textColor
+                    hudMessageLabel.leadingAnchor.constraint(equalTo: progressHUDBackgroundView.leadingAnchor, constant: 8).isActive = true
+                    hudMessageLabel.topAnchor.constraint(equalTo: progressHUDBackgroundView.topAnchor, constant: 76).isActive = true
+                    hudMessageLabel.trailingAnchor.constraint(equalTo: progressHUDBackgroundView.trailingAnchor, constant: -8).isActive = true
+                    hudMessageLabel.bottomAnchor.constraint(equalTo: progressHUDBackgroundView.bottomAnchor, constant: -8).isActive = true
+                    
+                } else {
+                    
+                    hudHeightAnchor?.isActive = true
+                    layerOneWidthAnchor = layerOneSpinnerView.widthAnchor.constraint(equalToConstant: progressHUDWidthXHeight - 40)         // 80
+                    layerOneHeightAnchor = layerOneSpinnerView.heightAnchor.constraint(equalToConstant: progressHUDWidthXHeight - 40)       // 80
+                    layerOneTopAnchor = layerOneSpinnerView.topAnchor.constraint(equalTo: progressHUDBackgroundView.topAnchor, constant: 20) // 20 from top
+                    
+                }
+                
+                // Activate once it has been determined if a message will be displayed
+                layerOneWidthAnchor?.isActive = true
+                layerOneHeightAnchor?.isActive = true
+                layerOneTopAnchor?.isActive = true
+                
+                progressHUDBackgroundView.layoutIfNeeded()
+                
+                // Finally, animate the view onto screen by moving up the centerYAnchor
+                hudCenterYAnchor?.constant = 0
+                
+                UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveLinear, animations: {
+                    
+                    self.progressHUDBackgroundView.superview?.layoutIfNeeded()
+                    
+                }, completion: nil)
+            }
+        }
+        
+        
+        
+    }
+    
+    
+    // Called in .showSuccess(withMessage:) and .showError(withMessage:)
+    
+    private class func handleDisplay(withMessage message: String, andAnimatedViewTitle viewTitle: String) {
+        if let window = UIApplication.shared.keyWindow {
+            
+            let dimensions: [String: CGFloat] = ["hudImageViewDimension": 40, "hudImageViewTopAnchorConstant": 16, "hudMessageLabelTopAnchorConstant": 64]
+            
+            
+            if isShowing == true {
+                
+                dismissImmediately()
+                
+                displayProgressHUD(withWindow: window, message: message, usingImageName: viewTitle, andLayoutDimensions: dimensions)
+                
+            } else {
+                
+                displayProgressHUD(withWindow: window, message: message, usingImageName: viewTitle, andLayoutDimensions: dimensions)
+                
+                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.9, options: .curveEaseInOut, animations: {
+                    
+                    self.progressHUDBackgroundView.superview?.layoutIfNeeded()
+                    
+                }, completion: nil)
+                
+            }
+            
+            // After "timeToDismissProgressHUD" (which is 5.0 seconds), call the dismiss func
+            timer = Timer.scheduledTimer(timeInterval: timeToDismissProgressHUD, target: self, selector: #selector(self.dismiss), userInfo: nil, repeats: false)
+        }
+    }
+    
+    
+    
+    
+    // Called in .handleDisplay(withDimensions:andMessage:) .handleDisplay(withMessage:andAnimatedViewTitle:)
     
     private class func displayProgressHUD(withWindow window: UIWindow, message: String?, usingImageName imageName: String?, andLayoutDimensions dimensions: [String: CGFloat]) {
         
@@ -523,20 +577,20 @@ public class CWProgressHUD: NSObject {
             }
             
             /*
-            progressHUDBackgroundView.addSubview(hudImageView)
-            
-            if let image = loadImage(withName: imageNameConfirmed) {
-                hudImageView.image = image
-            }
-            
-            let hudImageViewDimension = dimensions["hudImageViewDimension"]
-            let hudImageViewTopAnchorConstant = dimensions["hudImageViewTopAnchorConstant"]
-            
-            hudImageView.widthAnchor.constraint(equalToConstant: hudImageViewDimension!).isActive = true
-            hudImageView.heightAnchor.constraint(equalToConstant: hudImageViewDimension!).isActive = true
-            hudImageView.centerXAnchor.constraint(equalTo: progressHUDBackgroundView.centerXAnchor).isActive = true
-            hudImageView.topAnchor.constraint(equalTo: progressHUDBackgroundView.topAnchor, constant: hudImageViewTopAnchorConstant!).isActive = true
-            */
+             progressHUDBackgroundView.addSubview(hudImageView)
+             
+             if let image = loadImage(withName: imageNameConfirmed) {
+             hudImageView.image = image
+             }
+             
+             let hudImageViewDimension = dimensions["hudImageViewDimension"]
+             let hudImageViewTopAnchorConstant = dimensions["hudImageViewTopAnchorConstant"]
+             
+             hudImageView.widthAnchor.constraint(equalToConstant: hudImageViewDimension!).isActive = true
+             hudImageView.heightAnchor.constraint(equalToConstant: hudImageViewDimension!).isActive = true
+             hudImageView.centerXAnchor.constraint(equalTo: progressHUDBackgroundView.centerXAnchor).isActive = true
+             hudImageView.topAnchor.constraint(equalTo: progressHUDBackgroundView.topAnchor, constant: hudImageViewTopAnchorConstant!).isActive = true
+             */
             
         } else {
             
@@ -589,7 +643,7 @@ public class CWProgressHUD: NSObject {
             layerThreeWidthAnchor?.isActive = true
             layerThreeHeightAnchor?.isActive = true
             layerThreeTopAnchor?.isActive = true
-        
+            
         }
         
         // If a message String has been passed in, deactivate the hudHeightAnchor. Else, activate the predetermined heightAnchor of 120 (This does not contain a message with variable height).
@@ -597,18 +651,31 @@ public class CWProgressHUD: NSObject {
             
             let hudMessageLabelTopAnchorConstant = dimensions["hudMessageLabelTopAnchorConstant"]
             
-            hudHeightAnchor?.isActive = false
-            progressHUDBackgroundView.addSubview(hudMessageLabel)
+            
+            self.hudHeightAnchor?.isActive = false
+            self.hudHeightAnchor = nil
             hudMessageLabel.text = message
             hudMessageLabel.textColor = selectedTheme.colors.textColor
+            
+            print("hud message label number of lines: \(hudMessageLabel.numberOfLines)")
+            print("hud height anchor: \(hudHeightAnchor)")
+            print("hud height anchor constant: \(hudHeightAnchor?.constant)")
+            
+            progressHUDBackgroundView.addSubview(hudMessageLabel)
+            
             hudMessageLabel.leadingAnchor.constraint(equalTo: progressHUDBackgroundView.leadingAnchor, constant: 8).isActive = true
             hudMessageLabel.topAnchor.constraint(equalTo: progressHUDBackgroundView.topAnchor, constant: hudMessageLabelTopAnchorConstant!).isActive = true
             hudMessageLabel.trailingAnchor.constraint(equalTo: progressHUDBackgroundView.trailingAnchor, constant: -8).isActive = true
             hudMessageLabel.bottomAnchor.constraint(equalTo: progressHUDBackgroundView.bottomAnchor, constant: -8).isActive = true
-       
+            
+            
+            
         } else {
             
             hudHeightAnchor?.isActive = true
+            
+            //print("hud height anchor: \(hudHeightAnchor)")
+            //print("hud height anchor constant: \(hudHeightAnchor?.constant)")
             
         }
         
@@ -635,6 +702,7 @@ public class CWProgressHUD: NSObject {
             $0?.isActive = false
             //$0 = nil <- can't do this because this is an immutable value
         }
+        
         hudWidthAnchor = nil
         hudHeightAnchor = nil
         layerOneWidthAnchor = nil

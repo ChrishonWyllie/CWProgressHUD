@@ -46,6 +46,14 @@ class ViewController: UIViewController {
         return button
     }()
     
+    lazy var showProgressHUDWithProgressAndMessageButton: TestButton = {
+        let button = TestButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Show With Progress And Message", for: .normal)
+        button.addTarget(self, action: #selector(showProgressHUDWithProgressAndMessage(_:)), for: .touchUpInside)
+        return button
+    }()
+    
     lazy var showProgressHUDWithSuccessButton: TestButton = {
         let button = TestButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -83,13 +91,18 @@ class ViewController: UIViewController {
     }
     
     @objc private func showProgressHUDWithProgress(_ sender: Any) {
-        print("showing with progress")
-        showWithProgress()
+        print("showing with progress and no message")
+        showWithProgress(andMessage: nil)
+    }
+    
+    @objc private func showProgressHUDWithProgressAndMessage(_ sender: Any) {
+        print("showing with progress and a message")
+        showWithProgress(andMessage: "Please wait while we fetch your data. This may take some time so bare with us and watch this cool animation while you wait")
     }
     
     @objc private func showProgressHUDWithSuccess(_ sender: Any) {
         print("showing with success")
-        CWProgressHUD.createCustomStyle(withBackgroundColor: UIColor.red, andTextColor: UIColor.blue)
+        CWProgressHUD.createCustomStyle(withBackgroundColor: UIColor(red: 80/255, green: 45/255, blue: 12/255, alpha: 1.0), andTextColor: UIColor(red: 20/255, green: 15/255, blue: 12/255, alpha: 1.0))
         CWProgressHUD.showSuccess(withMessage: "Successfully uploaded your image!")
     }
     
@@ -98,13 +111,22 @@ class ViewController: UIViewController {
         CWProgressHUD.showError(withMessage: "There was an error fetching your login information. Perhaps this user was deleted...")
     }
     
-    private func showWithProgress() {
+    
+    
+    
+    
+    
+    private func showWithProgress(andMessage message: String?) {
         
         // timeInterval should be same as animationDuration
         if #available(iOS 10.0, *) {
             Timer.scheduledTimer(withTimeInterval: 0.4, repeats: true, block: { (timer) in
                 
-                CWProgressHUD.show(withProgress: self.progress)
+                if let mssg = message {
+                    CWProgressHUD.show(withProgress: self.progress, andMessage: mssg)
+                } else {
+                    CWProgressHUD.show(withProgress: self.progress, andMessage: nil)
+                }
                 self.progress += 0.1
                 
                 if self.progress >= 1.0 {
@@ -136,6 +158,7 @@ class ViewController: UIViewController {
         self.view.addSubview(showProgressHUDButton)
         self.view.addSubview(showProgressHUDWithMessage)
         self.view.addSubview(showProgressHUDWithProgressButton)
+        self.view.addSubview(showProgressHUDWithProgressAndMessageButton)
         self.view.addSubview(showProgressHUDWithSuccessButton)
         self.view.addSubview(showProgressHUDWithErrorButton)
         self.view.addSubview(dismissProgresHUDButton)
@@ -162,9 +185,15 @@ class ViewController: UIViewController {
         showProgressHUDWithProgressButton.widthAnchor.constraint(equalToConstant: 180).isActive = true
         showProgressHUDWithProgressButton.heightAnchor.constraint(equalToConstant: 36).isActive = true
         
+        // progress and message button
+        showProgressHUDWithProgressAndMessageButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        showProgressHUDWithProgressAndMessageButton.topAnchor.constraint(equalTo: showProgressHUDWithProgressButton.bottomAnchor, constant: 30).isActive = true
+        showProgressHUDWithProgressAndMessageButton.widthAnchor.constraint(equalToConstant: 280).isActive = true
+        showProgressHUDWithProgressAndMessageButton.heightAnchor.constraint(equalToConstant: 36).isActive = true
+        
         // success button
         showProgressHUDWithSuccessButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        showProgressHUDWithSuccessButton.topAnchor.constraint(equalTo: showProgressHUDWithProgressButton.bottomAnchor, constant: 30).isActive = true
+        showProgressHUDWithSuccessButton.topAnchor.constraint(equalTo: showProgressHUDWithProgressAndMessageButton.bottomAnchor, constant: 30).isActive = true
         showProgressHUDWithSuccessButton.widthAnchor.constraint(equalToConstant: 180).isActive = true
         showProgressHUDWithSuccessButton.heightAnchor.constraint(equalToConstant: 36).isActive = true
         

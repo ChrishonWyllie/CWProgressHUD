@@ -104,6 +104,8 @@ import UIKit
     
     func updateProgressAnimation(toProgress progress: CGFloat) {
         
+        // Needed to finish the animation and go to 100.0 (1.0)
+        // Check this out later
         layer.strokeEnd = progress
         
         let drawAnimation = CABasicAnimation(keyPath: "strokeEnd")
