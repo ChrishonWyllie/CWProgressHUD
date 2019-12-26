@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'CWProgressHUD'
-  s.version          = '1.0.1'
+  s.version          = '1.1.0'
   s.summary          = 'A quick and clean progress HUD.'
 
 # This description is used to generate tags and improve search results.
@@ -27,8 +27,9 @@ A quick and clean progress HUD. Install library in order to display an interacti
   s.author           = { 'ChrishonWyllie' => 'chrishon595@yahoo.com' }
   s.source           = { :git => 'https://github.com/ChrishonWyllie/CWProgressHUD.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.swift_versions   = ['4.0', '4.1', '4.2', '5.0', '5.1']
 
-  s.ios.deployment_target = '9.3'
+  s.ios.deployment_target = '12.0'
 
   s.source_files = 'Classes/**/*'
 

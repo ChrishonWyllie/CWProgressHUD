@@ -534,8 +534,6 @@ public class CWProgressHUD: NSObject {
                 
                 progressHUDBackgroundView.addSubview(checkmarkView)
                 
-                
-                
                 let hudImageViewDimension = dimensions["hudImageViewDimension"]
                 let hudImageViewTopAnchorConstant = dimensions["hudImageViewTopAnchorConstant"]
                 

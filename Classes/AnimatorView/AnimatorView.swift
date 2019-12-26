@@ -10,6 +10,10 @@ import UIKit
 
 @IBDesignable internal class AnimatorView: UIView {
     
+    // 1 == beginAnimation was called
+    // 2 == updateProgress wsa called
+    var animationFlag: Int = 0
+    
     var animationDuration: Double = 0.0
     var defaultStrokeStart: CGFloat = 0.08
     var defaultStrokeEnd: CGFloat = 0.95
@@ -21,6 +25,7 @@ import UIKit
      
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setupNotificationObservers()
     }
     
     init(animationDuration: Double, rotatesClockwise: Bool, progress: CGFloat?) {
@@ -28,7 +33,11 @@ import UIKit
         self.rotatesClockwise = rotatesClockwise
         self.progress = progress
         let someDefaultFrame: CGRect = CGRect(x: 0, y: 0, width: 80, height: 80)
+        
         super.init(frame: someDefaultFrame)
+        
+        // This has to come after initializer to access 'self'
+        setupNotificationObservers()
     }
     
     override var layer: CAShapeLayer {
@@ -57,9 +66,28 @@ import UIKit
         setBezierPath(forLayer: layer)
     }
     
+    private func setupNotificationObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(handleWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleDidEnterBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
+    }
+    
+    @objc private func handleWillEnterForeground() {
+        //print("app will enter foreground")
+        if animationFlag == 1 {
+            beginLoadingAnimation()
+        }
+    }
+    
+    @objc private func handleDidEnterBackground() {
+        //print("app did enter background")
+    }
+    
     override func didMoveToWindow() {
         // no longer calling this function automatically since the 'updateProgressAnimation' may be called
         //beginLoadingAnimation()
+        //print(self.frame.width, self.frame.height)
+        //print(self.bounds.width, self.bounds.height)
+        
     }
     
     var gradientLayer: CAGradientLayer = {
@@ -77,6 +105,9 @@ import UIKit
     }
     
     func beginLoadingAnimation() {
+        
+        animationFlag = 1
+        
         let animation = CAKeyframeAnimation(keyPath: "transform.rotation")
         
         // Configure these better to create a smoother rotation. The number of keyTimes must match the number of values
@@ -95,7 +126,7 @@ import UIKit
         
         rotatesClockwise ? animation.values?.reverse() : nil
         
-        animation.calculationMode = kCAAnimationLinear
+        animation.calculationMode = CAAnimationCalculationMode.linear
         animation.duration = animationDuration
         animation.repeatCount = Float.infinity
         layer.add(animation, forKey: animation.keyPath)
@@ -103,6 +134,8 @@ import UIKit
     
     
     func updateProgressAnimation(toProgress progress: CGFloat) {
+        
+        animationFlag = 2
         
         // Needed to finish the animation and go to 100.0 (1.0)
         // Check this out later
@@ -125,7 +158,7 @@ import UIKit
         drawAnimation.toValue = Double(progress)
         
         // Experiment with timing to get the appearence to look the way you want
-        drawAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        drawAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
         
         // Add the animation to the circle
         layer.add(drawAnimation, forKey: "draw")

@@ -49,9 +49,9 @@ import UIKit
         checkmarkAnimationLayer?.lineWidth = animationLayerWidth
         
         // Makes the ends of the trackLayer rounded, or otherwise...
-        checkmarkAnimationLayer?.lineCap = kCALineCapRound
+        checkmarkAnimationLayer?.lineCap = CAShapeLayerLineCap.round
         // Makes the bottom part of the checkmark rounded, or otherwise. Basically wherever another line is added (addLine function)
-        checkmarkAnimationLayer?.lineJoin = kCALineJoinRound
+        checkmarkAnimationLayer?.lineJoin = CAShapeLayerLineJoin.round
         // This causes a cut off at the bottom of the checkmark
         //layer.lineJoin = kCALineJoinBevel
     }
@@ -78,7 +78,7 @@ import UIKit
         pathAnimation.toValue = NSNumber(floatLiteral: 1)
         // Keep from disappearing after
         pathAnimation.isRemovedOnCompletion = false
-        pathAnimation.fillMode = kCAFillModeBoth
+        pathAnimation.fillMode = CAMediaTimingFillMode.both
         return pathAnimation
     }()
     
