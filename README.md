@@ -52,6 +52,16 @@ CWProgressHUD.setStyle(.light)
 CWProgressHUD.setStyle(.dark)
 ```
 
+<p>However, you may use your own custom colors with this function:</h3>
+
+```swift
+CWProgressHUD.createCustomStyle(withBackgroundColor: UIColor(red: 80/255, green: 45/255, blue: 12/255, alpha: 1.0),
+                                andTextColor: UIColor(red: 20/255, green: 15/255, blue: 12/255, alpha: 1.0))
+
+CWProgressHUD.showSuccess(withMessage: "Successfully uploaded your image!")
+```
+
+<p>The backgroundColor changes the color of the background of course, while the textColor changes the color of the text AND whichever animated view is being displayed. For example, the above example will create a teal-like green background with a navy blue text color and checkmark. You can pair this with any of the show(...) functions</p>
 
 ## Example
 
